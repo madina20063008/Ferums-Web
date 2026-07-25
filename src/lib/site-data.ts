@@ -47,7 +47,10 @@ const nonEmpty = <T>(rows: T[], fb: T[]) => (rows.length ? rows : fb);
 // ---- Static site copy (the `site` Setting) ----
 export async function getSite(): Promise<SiteContent> {
   const row = await safe(() => prisma.setting.findUnique({ where: { key: "site" } }), null);
-  if (row?.valueJson) return row.valueJson as unknown as SiteContent;
+  const v = row?.valueJson as unknown as Partial<SiteContent> | undefined;
+  // Only trust a stored setting if it has the required top-level shape; otherwise
+  // fall back to bundled content so metadata/render can never read `undefined`.
+  if (v && v.seo && v.nav && v.footer && v.home) return v as SiteContent;
   return SITE_FALLBACK;
 }
 
