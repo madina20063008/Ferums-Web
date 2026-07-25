@@ -1,0 +1,197 @@
+// FERUMS — Industrial engineering company site — Prisma schema
+// Dev: SQLite (zero-config). Prod: the Vercel build swaps `provider` to
+// "postgresql" and uses DATABASE_URL. Schema is portable (Json for structured
+// fields, no provider-specific types). All display copy is bilingual (en/ru).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // Local dev uses SQLite. The vercel-build script rewrites this to "postgresql"
+  // for production — do not rely on this literal staying "sqlite" in deploys.
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------- Auth -----------------------
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("admin") // admin | editor
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ------------------- Site settings ------------------
+// Key-value store for non-list copy (nav, hero, section titles, About /
+// Sustainability / FerumsDigital body copy, footer, global SEO defaults, and
+// the Organization info used for JSON-LD) kept as bilingual JSON per key.
+model Setting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  valueJson Json
+  updatedAt DateTime @updatedAt
+}
+
+// -------------------- Uploads -----------------------
+model MediaAsset {
+  id        Int      @id @default(autoincrement())
+  url       String
+  filename  String
+  mime      String
+  size      Int
+  createdAt DateTime @default(now())
+}
+
+// -------------------- Products ----------------------
+model Product {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  titleEn     String
+  titleRu     String
+  categoryEn  String   @default("")
+  categoryRu  String   @default("")
+  descEn      String
+  descRu      String
+  specEn      String   @default("") // short one-line spec shown on cards
+  specRu      String   @default("")
+  image       String   @default("")
+  chips       Json     @default("[]") // [{ en, ru }] short attribute chips
+  specs       Json     @default("[]") // [{ kEn, kRu, vEn, vRu }] detail table rows
+  features    Json     @default("[]") // [{ titleEn, titleRu, descEn, descRu }]
+  metaTitleEn String   @default("")
+  metaTitleRu String   @default("")
+  metaDescEn  String   @default("")
+  metaDescRu  String   @default("")
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// -------------------- Projects ----------------------
+model Project {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  titleEn     String
+  titleRu     String
+  tagEn       String   @default("")
+  tagRu       String   @default("")
+  locEn       String   @default("")
+  locRu       String   @default("")
+  descEn      String
+  descRu      String
+  image       String   @default("")
+  stat1       String   @default("")
+  stat1LabelEn String  @default("")
+  stat1LabelRu String  @default("")
+  stat2       String   @default("")
+  stat2LabelEn String  @default("")
+  stat2LabelRu String  @default("")
+  metaTitleEn String   @default("")
+  metaTitleRu String   @default("")
+  metaDescEn  String   @default("")
+  metaDescRu  String   @default("")
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// --------------------- News -------------------------
+model Article {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  titleEn     String
+  titleRu     String
+  tagEn       String   @default("")
+  tagRu       String   @default("")
+  dateEn      String   @default("")
+  dateRu      String   @default("")
+  publishedAt DateTime @default(now()) // used for sitemap lastmod + ordering
+  excerptEn   String   @default("")
+  excerptRu   String   @default("")
+  bodyEn      String   @default("")
+  bodyRu      String   @default("")
+  image       String   @default("")
+  metaTitleEn String   @default("")
+  metaTitleRu String   @default("")
+  metaDescEn  String   @default("")
+  metaDescRu  String   @default("")
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ------------------ Career roles --------------------
+model CareerRole {
+  id         Int      @id @default(autoincrement())
+  slug       String   @unique
+  titleEn    String
+  titleRu    String
+  deptEn     String   @default("")
+  deptRu     String   @default("")
+  locationEn String   @default("")
+  locationRu String   @default("")
+  typeEn     String   @default("") // Full-time, Contract…
+  typeRu     String   @default("")
+  descEn     String   @default("")
+  descRu     String   @default("")
+  order      Int      @default(0)
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// ------------------- Industries ---------------------
+model Industry {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  titleEn   String
+  titleRu   String
+  descEn    String
+  descRu    String
+  tags      Json     @default("[]") // [{ en, ru }]
+  image     String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -------------------- Services ----------------------
+// Solutions.dc.html — numbered service offerings.
+model Service {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  numberTag String   @default("") // "01", "02"…
+  titleEn   String
+  titleRu   String
+  descEn    String
+  descRu    String
+  items     Json     @default("[]") // [{ en, ru }] bullet chips
+  image     String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --------------- Contact submissions ----------------
+// Public contact form submissions land here (admin inbox).
+model ContactSubmission {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  company   String?
+  phone     String?
+  message   String?
+  status    String   @default("new") // new | in_progress | done | spam
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -1,0 +1,143 @@
+/* Tailwind v4 — utilities + theme only (no preflight). The admin panel uses
+   Tailwind classes; the public site uses the CSS variables + classes below. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* ============================================================
+   FERUMS — public site design system
+   Dark by default; [data-theme="light"] flips the palette.
+   Fonts: Geist (UI) + IBM Plex Mono (labels/mono).
+   ============================================================ */
+:root {
+  --accent: #1CAFE8;
+  --accent-ink: #ffffff;
+
+  /* dark (default) */
+  --bg: #0B0C0E;
+  --bg-2: #101114;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #E7E9ED;
+  --text-dim: rgba(255, 255, 255, 0.60);
+  --text-faint: rgba(255, 255, 255, 0.38);
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] {
+  --bg: #F5F6F8;
+  --bg-2: #FDFDFE;
+  --surface: #ffffff;
+  --surface-2: #ffffff;
+  --border: rgba(16, 20, 28, 0.10);
+  --border-strong: rgba(16, 20, 28, 0.18);
+  --text: #10141C;
+  --text-dim: rgba(16, 20, 28, 0.62);
+  --text-faint: rgba(16, 20, 28, 0.42);
+  --shadow: 0 24px 54px rgba(20, 22, 26, 0.12);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Geist", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+.site-scope a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent); color: #fff; }
+
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* Layout: fixed left sidebar + content */
+.site-shell { min-height: 100vh; }
+.site-main { margin-left: 280px; min-width: 0; }
+
+.site-sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 280px;
+  box-sizing: border-box;
+  background: var(--bg-2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 36px 24px 28px;
+  z-index: 100; overflow-y: auto;
+}
+.site-topbar { display: none; }
+.site-scrim { display: none; }
+
+@media (max-width: 1024px) {
+  .site-main { margin-left: 0; padding-top: 64px; }
+  .site-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    position: fixed; top: 0; left: 0; right: 0; height: 64px; padding: 0 22px;
+    background: var(--bg-2); border-bottom: 1px solid var(--border); z-index: 90;
+  }
+  .site-sidebar {
+    transform: translateX(-100%); transition: transform 0.3s ease; z-index: 110;
+  }
+  .site-sidebar.open { transform: translateX(0); }
+  .site-scrim { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 105; }
+}
+
+/* Reusable bits */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 640px) { .container { padding: 0 22px; } }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(28, 175, 232, 0.4);
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 14px; padding: 14px 24px;
+  font-weight: 600; font-size: 15px; cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.25s ease, border-color 0.25s ease;
+}
+.btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(28, 175, 232, 0.4); color: #fff; }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.chip {
+  display: inline-flex; align-items: center;
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.04em;
+  padding: 6px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--text-dim);
+}
+
+.section { padding: 96px 0; }
+@media (max-width: 640px) { .section { padding: 64px 0; } }
+
+.h1 { font-size: clamp(44px, 5.4vw, 78px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.04; margin: 0; }
+.h2 { font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+.lead { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.6; color: var(--text-dim); }
+
+/* Reveal on scroll */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+img { max-width: 100%; }
