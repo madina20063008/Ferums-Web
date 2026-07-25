@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "vercel-build": "sed -i 's/provider = \"sqlite\"/provider = \"postgresql\"/' prisma/schema.prisma && prisma generate && (prisma db push --skip-generate --accept-data-loss || echo 'db push skipped') && next build",
+    "vercel-build": "sed -i 's/provider = \"sqlite\"/provider = \"postgresql\"/' prisma/schema.prisma && prisma generate && (prisma db push --skip-generate --accept-data-loss || echo 'db push skipped') && (tsx prisma/seed-if-empty.ts || echo 'seed skipped') && next build",
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "eslint",
