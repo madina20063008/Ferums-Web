@@ -195,3 +195,18 @@ model ContactSubmission {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// -------------------- Partners ----------------------
+// Global manufacturing partners / represented brands.
+model Partner {
+  id        Int      @id @default(autoincrement())
+  name      String
+  countryEn String   @default("")
+  countryRu String   @default("")
+  logo      String   @default("")
+  url       String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -168,6 +168,24 @@ export const RESOURCES: Record<string, ResourceConfig> = {
       { type: "boolean", name: "published", label: "Published" },
     ],
   },
+  partners: {
+    key: "partners", label: "Partners", api: "/api/partners", idType: "int", canCreate: true,
+    columns: [
+      { key: "logo", label: "Logo", type: "image" },
+      { key: "name", label: "Name" },
+      { key: "countryEn", label: "Country" },
+      { key: "order", label: "Order" },
+      { key: "published", label: "Live", type: "bool" },
+    ],
+    fields: [
+      { type: "text", name: "name", label: "Name" },
+      { type: "i18n", name: "country", label: "Country" },
+      { type: "image", name: "logo", label: "Logo" },
+      { type: "text", name: "url", label: "Website URL (optional)" },
+      { type: "number", name: "order", label: "Order" },
+      { type: "boolean", name: "published", label: "Published" },
+    ],
+  },
   "contact-submissions": {
     key: "contact-submissions", label: "Contact inbox", api: "/api/contact-submissions", idType: "int", canCreate: false,
     columns: [
@@ -209,5 +227,5 @@ export const RESOURCES: Record<string, ResourceConfig> = {
 
 export const RESOURCE_ORDER = [
   "products", "projects", "articles", "career-roles",
-  "industries", "services", "contact-submissions", "users",
+  "industries", "services", "partners", "contact-submissions", "users",
 ];

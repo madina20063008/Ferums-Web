@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale, pick, field, ui, type Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 import { buildMetadata } from "@/lib/seo";
-import { getSite, getIndustries, getServices, getProducts, getProjects, getArticles } from "@/lib/site-data";
+import { getSite, getIndustries, getServices, getProducts, getProjects, getArticles, getPartners } from "@/lib/site-data";
 import { Section, SectionTitle, Media, TextLink } from "@/components/site/ui";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -24,8 +24,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const t = ui(locale);
-  const [site, industries, services, products, projects, articles] = await Promise.all([
-    getSite(), getIndustries(), getServices(), getProducts(), getProjects(), getArticles(),
+  const [site, industries, services, products, projects, articles, partners] = await Promise.all([
+    getSite(), getIndustries(), getServices(), getProducts(), getProjects(), getArticles(), getPartners(),
   ]);
   const h = site.home;
   const s = site.sectionIntros;
@@ -52,7 +52,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Stats */}
       {h.stats.length > 0 && (
         <Section style={{ paddingTop: 0, paddingBottom: 40 }}>
-          <div className="reveal" style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(h.stats.length, 5)}, 1fr)`, gap: 20 }}>
+          <div className="reveal stats-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(h.stats.length, 5)}, 1fr)`, gap: 20 }}>
             {h.stats.map((st, i) => (
               <div key={i} className="card" style={{ padding: "26px 22px" }}>
                 <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--accent)" }}>{st.value}</div>
@@ -189,6 +189,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div style={{ marginTop: 26 }}><TextLink locale={locale} href="/news">{t.allNews}</TextLink></div>
       </Section>
+
+      {/* Partners */}
+      {partners.length > 0 && (
+        <Section style={{ paddingTop: 0 }}>
+          <SectionTitle title={pick(h.partnersTitle, locale)} />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 14 }}>
+            {partners.map((p) => (
+              <div key={p.id} className="reveal" style={{ background: "#fff", borderRadius: 12, height: 92, display: "flex", alignItems: "center", justifyContent: "center", padding: 14 }}>
+                {p.logo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={p.logo} alt={p.name} loading="lazy" style={{ maxHeight: 60, maxWidth: "100%", objectFit: "contain" }} />
+                ) : (
+                  <span style={{ fontWeight: 700, color: "#10141C" }}>{p.name}</span>
+                )}
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 26 }}><TextLink locale={locale} href="/partners">{t.viewAll}</TextLink></div>
+        </Section>
+      )}
 
       {/* CTA banner */}
       <Section style={{ paddingTop: 0 }}>

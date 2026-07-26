@@ -8,8 +8,25 @@ import type {
   CareerRoleSeed,
   IndustrySeed,
   ServiceSeed,
+  PartnerSeed,
   SiteContent,
 } from "./site-content";
+
+export const PARTNERS: PartnerSeed[] = [
+  { name: "HORA", countryEn: "Germany", countryRu: "Германия", logo: "/partners/hora.png", url: "" },
+  { name: "ORBIT MERRET", countryEn: "Czech Republic", countryRu: "Чехия", logo: "/partners/orbit-merret.png", url: "" },
+  { name: "Parker Meggitt", countryEn: "USA", countryRu: "США", logo: "/partners/parker-meggitt.png", url: "" },
+  { name: "Mueller Steam Specialty", countryEn: "USA", countryRu: "США", logo: "/partners/mueller-steam-specialty.png", url: "" },
+  { name: "Nuovo Pignone", countryEn: "USA", countryRu: "США", logo: "/partners/nuovo-pignone.png", url: "" },
+  { name: "S-LOK", countryEn: "South Korea", countryRu: "Южная Корея", logo: "/partners/s-lok.png", url: "" },
+  { name: "FBM Hudson", countryEn: "Italy", countryRu: "Италия", logo: "/partners/fbm-hudson.png", url: "" },
+  { name: "THINKTANK", countryEn: "China", countryRu: "Китай", logo: "/partners/thinktank.png", url: "" },
+  { name: "Young Engineering", countryEn: "USA", countryRu: "США", logo: "/partners/young-engineering.png", url: "" },
+  { name: "YOKOGAWA", countryEn: "Japan", countryRu: "Япония", logo: "/partners/yokogawa.png", url: "" },
+  { name: "JILP", countryEn: "China", countryRu: "Китай", logo: "/partners/jilp.png", url: "" },
+  { name: "SKF", countryEn: "China, France", countryRu: "Китай, Франция", logo: "/partners/skf.webp", url: "" },
+  { name: "KOYO", countryEn: "China, Japan", countryRu: "Китай, Япония", logo: "/partners/koyo.png", url: "" },
+];
 
 export const PRODUCTS: ProductSeed[] = [
   {
@@ -831,6 +848,7 @@ export const SITE: SiteContent = {
     ],
     company: [
       { en: "About FERUMS", ru: "О компании FERUMS", href: "/about" },
+      { en: "Partners", ru: "Партнёры", href: "/partners" },
       { en: "Sustainability", ru: "Устойчивое развитие", href: "/sustainability" },
       { en: "News", ru: "Новости", href: "/news" },
       { en: "Careers", ru: "Карьера", href: "/careers" },
@@ -857,7 +875,7 @@ export const SITE: SiteContent = {
     ],
     companyLinks: [
       { en: "About FERUMS", ru: "О компании FERUMS", href: "/about" },
-      { en: "Sustainability", ru: "Устойчивое развитие", href: "/sustainability" },
+      { en: "Partners", ru: "Партнёры", href: "/partners" },
       { en: "News", ru: "Новости", href: "/news" },
       { en: "Careers", ru: "Карьера", href: "/careers" },
     ],

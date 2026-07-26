@@ -4,7 +4,7 @@ import { getProducts, getProjects, getArticles } from "@/lib/site-data";
 
 const STATIC_PATHS = [
   "", "/industries", "/services", "/products", "/projects",
-  "/news", "/careers", "/about", "/sustainability", "/ferums-digital", "/contact",
+  "/news", "/careers", "/about", "/sustainability", "/ferums-digital", "/partners", "/contact",
 ];
 
 function entry(path: string, lastModified?: Date): MetadataRoute.Sitemap[number] {

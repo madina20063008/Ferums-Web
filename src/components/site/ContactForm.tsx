@@ -44,7 +44,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
 
   return (
     <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+      <div className="form-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
         <input required placeholder={t.name} value={state.name} onChange={set("name")} style={input} />
         <input required type="email" placeholder={t.email} value={state.email} onChange={set("email")} style={input} />
         <input placeholder={t.company} value={state.company} onChange={set("company")} style={input} />

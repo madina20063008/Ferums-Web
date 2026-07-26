@@ -85,6 +85,14 @@ export const serviceSchema = z.object({
   order, published,
 });
 
+export const partnerSchema = z.object({
+  name: str,
+  countryEn: optStr, countryRu: optStr,
+  logo: optStr,
+  url: optStr,
+  order, published,
+});
+
 // Public contact form (publicCreate) + admin status update
 export const contactSubmissionSchema = z.object({
   name: str,

@@ -1,7 +1,7 @@
 import type { PrismaClient, Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { prisma } from "./db";
-import { PRODUCTS, PROJECTS, ARTICLES, ROLES, INDUSTRIES, SERVICES, SITE } from "./seed-data";
+import { PRODUCTS, PROJECTS, ARTICLES, ROLES, INDUSTRIES, SERVICES, PARTNERS, SITE } from "./seed-data";
 
 /** Idempotent: fills the database with the admin user + all starting content. */
 export async function seedDatabase(db: PrismaClient = prisma) {
@@ -57,6 +57,12 @@ export async function seedDatabase(db: PrismaClient = prisma) {
   await db.service.deleteMany();
   for (let i = 0; i < SERVICES.length; i++) {
     await db.service.create({ data: { ...SERVICES[i], order: i } });
+  }
+
+  // ---------------- Partners ----------------
+  await db.partner.deleteMany();
+  for (let i = 0; i < PARTNERS.length; i++) {
+    await db.partner.create({ data: { ...PARTNERS[i], order: i } });
   }
 }
 

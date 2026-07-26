@@ -1,7 +1,7 @@
-import type { Product, Project, Article, CareerRole, Industry, Service } from "@prisma/client";
+import type { Product, Project, Article, CareerRole, Industry, Service, Partner } from "@prisma/client";
 import { prisma } from "./db";
 import type { SiteContent } from "./site-content";
-import { SITE as SITE_FALLBACK, PRODUCTS, PROJECTS, ARTICLES, ROLES, INDUSTRIES, SERVICES } from "./seed-data";
+import { SITE as SITE_FALLBACK, PRODUCTS, PROJECTS, ARTICLES, ROLES, INDUSTRIES, SERVICES, PARTNERS } from "./seed-data";
 
 // The public site is DB-optional: every read tries the database first, and
 // falls back to the bundled design content when the DB is empty, unmigrated or
@@ -39,6 +39,7 @@ const FB = {
   roles: decorate(ROLES) as unknown as CareerRole[],
   industries: decorate(INDUSTRIES) as unknown as Industry[],
   services: decorate(SERVICES) as unknown as Service[],
+  partners: decorate(PARTNERS) as unknown as Partner[],
 };
 
 const pubOrder = { where: { published: true }, orderBy: [{ order: "asc" as const }, { id: "asc" as const }] };
@@ -84,5 +85,8 @@ export async function getIndustries(): Promise<Industry[]> {
 export async function getServices(): Promise<Service[]> {
   return nonEmpty(await safe(() => prisma.service.findMany(pubOrder), FB.services), FB.services);
 }
+export async function getPartners(): Promise<Partner[]> {
+  return nonEmpty(await safe(() => prisma.partner.findMany(pubOrder), FB.partners), FB.partners);
+}
 
-export type { Product, Project, Article, CareerRole as Role, Industry, Service };
+export type { Product, Project, Article, CareerRole as Role, Industry, Service, Partner };

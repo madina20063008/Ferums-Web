@@ -1,13 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // Progressive scroll-reveal: adds `.in` to every `.reveal` as it enters view.
-// No-op for users who prefer reduced motion (CSS already shows them).
+// Re-runs on every route change (App Router keeps this component mounted across
+// client-side navigations, so without the `pathname` dependency the new page's
+// `.reveal` elements would never be observed and would stay invisible until a
+// full refresh). No-op for users who prefer reduced motion (CSS shows them).
 export function RevealObserver() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal:not(.in)"));
-    if (!("IntersectionObserver" in window) || els.length === 0) {
+    if (els.length === 0) return;
+    if (!("IntersectionObserver" in window)) {
       els.forEach((el) => el.classList.add("in"));
       return;
     }
@@ -24,7 +31,7 @@ export function RevealObserver() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  });
+  }, [pathname]);
 
   return null;
 }

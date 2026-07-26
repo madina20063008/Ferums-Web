@@ -64,6 +64,13 @@ export interface ServiceSeed {
   image: string;
 }
 
+export interface PartnerSeed {
+  name: string;
+  countryEn: string; countryRu: string;
+  logo: string;
+  url: string;
+}
+
 // ---- Static page copy (stored in the `site` Setting as JSON) ----
 export interface SiteContent {
   seo: {
