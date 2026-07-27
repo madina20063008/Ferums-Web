@@ -25,7 +25,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
-      <PageHeader title={pick(a.title, locale)} lead={pick(a.lead, locale)} />
+      <PageHeader title={pick(a.title, locale)} lead={pick(a.lead, locale)} video="about" />
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">

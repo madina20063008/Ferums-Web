@@ -28,7 +28,7 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <PageHeader title={pick(site.sectionIntros.careers.title, locale)} lead={pick(c.intro, locale)} />
+      <PageHeader title={pick(site.sectionIntros.careers.title, locale)} lead={pick(c.intro, locale)} video="careers" />
 
       {c.benefits.length > 0 && (
         <section className="section" style={{ paddingTop: 0 }}>

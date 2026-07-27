@@ -25,7 +25,7 @@ export default async function SustainabilityPage({ params }: { params: Promise<{
 
   return (
     <>
-      <PageHeader title={pick(su.title, locale)} lead={pick(su.lead, locale)} />
+      <PageHeader title={pick(su.title, locale)} lead={pick(su.lead, locale)} video="sustainability" />
 
       {su.pillars.length > 0 && (
         <section className="section" style={{ paddingTop: 0 }}>

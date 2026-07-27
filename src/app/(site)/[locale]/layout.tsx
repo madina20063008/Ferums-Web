@@ -9,6 +9,7 @@ import { Footer } from "@/components/site/Footer";
 import { ThemeScript } from "@/components/site/ThemeScript";
 import { RevealObserver } from "@/components/site/Reveal";
 import { JsonLd } from "@/components/site/JsonLd";
+import { IntroOverlay } from "@/components/site/IntroOverlay";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -73,6 +74,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body>
+        <IntroOverlay />
         <JsonLd data={org} />
         <div className="site-scope site-shell">
           <Sidebar locale={locale} nav={nav} />

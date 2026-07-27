@@ -41,7 +41,7 @@ export default async function FerumsDigitalPage({ params }: { params: Promise<{ 
 
   return (
     <>
-      <PageHeader title={pick(d.title, locale)} lead={pick(d.lead, locale)} />
+      <PageHeader title={pick(d.title, locale)} lead={pick(d.lead, locale)} video="ferumsDigital" />
 
       <ChipGroup title={pick({ en: "AI applications", ru: "ИИ-приложения" }, locale)} items={d.aiApps} locale={locale} />
       <ChipGroup title={pick({ en: "Platforms", ru: "Платформы" }, locale)} items={d.platforms} locale={locale} />

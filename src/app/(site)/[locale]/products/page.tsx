@@ -28,7 +28,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <PageHeader title={pick(s.title, locale)} lead={pick(s.subtitle, locale)} />
+      <PageHeader title={pick(s.title, locale)} lead={pick(s.subtitle, locale)} video="products" />
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 18 }}>
