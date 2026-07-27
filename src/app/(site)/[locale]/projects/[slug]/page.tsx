@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { isLocale, field, ui, type Locale } from "@/lib/i18n";
+import { isLocale, field, ui, localizeStat, type Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 import { buildMetadata } from "@/lib/seo";
 import { getProject, getProjects } from "@/lib/site-data";
@@ -30,8 +30,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ loca
   const t = ui(locale);
 
   const stats = [
-    { v: p.stat1, l: field(p, "stat1Label", locale) },
-    { v: p.stat2, l: field(p, "stat2Label", locale) },
+    { v: localizeStat(p.stat1, locale), l: field(p, "stat1Label", locale) },
+    { v: localizeStat(p.stat2, locale), l: field(p, "stat2Label", locale) },
   ].filter((s) => s.v);
 
   return (

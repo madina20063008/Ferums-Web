@@ -507,7 +507,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Pumps, compressors, sealing systems and valves for upstream, midstream and refining — engineered for continuous duty in severe service.",
     descRu:
-      "Насосы, компрессоры, уплотнительные системы и арматура для добычи, транспортировки и переработки — для непрерывной работы в тяжёлых условиях.",
+      "Насосы, компрессоры, уплотнения и арматура для добычи, транспортировки и переработки нефти и газа — оборудование для непрерывной работы в самых тяжёлых условиях эксплуатации.",
     tags: [
       { en: "Refineries", ru: "НПЗ" },
       { en: "Gas processing", ru: "Газопереработка" },
@@ -522,7 +522,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Process compressors, mechanical seals and control valves for aggressive media and demanding process conditions.",
     descRu:
-      "Технологические компрессоры, торцевые уплотнения и регулирующая арматура для агрессивных сред и жёстких условий процессов.",
+      "Технологические компрессоры, торцевые уплотнения и регулирующая арматура для агрессивных технологических условий",
     tags: [
       { en: "API 618", ru: "API 618" },
       { en: "Sealing systems", ru: "Уплотнения" },
@@ -537,7 +537,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Steam turbines, boiler feed pumps and safety valves supporting reliable, efficient power production.",
     descRu:
-      "Паровые турбины, питательные насосы и предохранительная арматура для надёжной и эффективной генерации.",
+      "Паровые турбины, питательные насосы и предохранительная арматура для надёжной и эффективной выработки энергии.",
     tags: [
       { en: "Steam turbines", ru: "Паровые турбины" },
       { en: "Feed pumps", ru: "Питательные насосы" },
@@ -552,11 +552,11 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Rotating equipment and balance-of-plant packages for renewable and hybrid generation.",
     descRu:
-      "Вращающееся оборудование и пакеты «баланса станции» для ВИЭ и гибридной генерации.",
+      "Поставка роторного оборудования и комплексных решений для систем Balance of Plant (BoP) на объектах возобновляемой и гибридной генерации.",
     tags: [
-      { en: "Wind", ru: "Ветер" },
-      { en: "Solar", ru: "Солнце" },
-      { en: "Storage", ru: "Накопители" },
+      { en: "Wind", ru: "Ветреная энергия" },
+      { en: "Solar", ru: "Солнечная энергия" },
+      { en: "Storage", ru: "Накопительная энергия" },
     ],
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80",
   },
@@ -567,7 +567,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Slurry pumps, heavy-duty bearings and valves for extraction, processing and smelting operations.",
     descRu:
-      "Шламовые насосы, тяжёлые подшипники и арматура для добычи, обогащения и плавки.",
+      "Шламовые насосы, подшипники для тяжёлых условий эксплуатации и промышленная трубопроводная арматура для добычи, переработки и металлургического производства.",
     tags: [
       { en: "Slurry pumps", ru: "Шламовые насосы" },
       { en: "Bearings", ru: "Подшипники" },
@@ -578,11 +578,11 @@ export const INDUSTRIES: IndustrySeed[] = [
   {
     slug: "manufacturing",
     titleEn: "Manufacturing",
-    titleRu: "Производство",
+    titleRu: "Промышленное производство",
     descEn:
       "Reliable utility equipment and spare-parts programs keeping continuous production lines running.",
     descRu:
-      "Надёжное вспомогательное оборудование и программы запчастей для непрерывных производственных линий.",
+      "Надёжное вспомогательное оборудование и программы поставки запасных частей для обеспечения бесперебойной работы непрерывных производственных линий.",
     tags: [
       { en: "Utility pumps", ru: "Насосы" },
       { en: "Spares", ru: "Запчасти" },
@@ -593,11 +593,11 @@ export const INDUSTRIES: IndustrySeed[] = [
   {
     slug: "water-treatment",
     titleEn: "Water Treatment",
-    titleRu: "Водоподготовка",
+    titleRu: "Подготовка воды",
     descEn:
       "Pumping stations, control valves and dosing systems for municipal and industrial water infrastructure.",
     descRu:
-      "Насосные станции, регулирующая арматура и системы дозирования для муниципальной и промышленной воды.",
+      "Насосные станции, регулирующие клапаны и системы дозирования для муниципальных и промышленных объектов водоснабжения и водоочистки.",
     tags: [
       { en: "Pumping", ru: "Насосные станции" },
       { en: "Control valves", ru: "Арматура" },
@@ -608,11 +608,11 @@ export const INDUSTRIES: IndustrySeed[] = [
   {
     slug: "pulp-paper",
     titleEn: "Pulp & Paper",
-    titleRu: "Целлюлозно-бумажная",
+    titleRu: "Промышленность целлюлозы и бумаги",
     descEn:
       "Sealing solutions and process pumps for fiber lines and chemical recovery.",
     descRu:
-      "Уплотнительные решения и технологические насосы для волоконных линий и регенерации химикатов.",
+      "Уплотнительные решения и технологические насосы для линий производства целлюлозы и систем регенерации химикатов.",
     tags: [
       { en: "Process pumps", ru: "Насосы" },
       { en: "Seals", ru: "Уплотнения" },
@@ -625,7 +625,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     titleEn: "Food Processing",
     titleRu: "Пищевая промышленность",
     descEn: "Hygienic pumps, seals and valves compliant with food-grade standards.",
-    descRu: "Гигиенические насосы, уплотнения и арматура по пищевым стандартам.",
+    descRu: "Гигиеничные насосы, уплотнения и клапаны, соответствующие стандартам пищевой промышленности.",
     tags: [
       { en: "Hygienic design", ru: "Гигиеничный дизайн" },
       { en: "CIP/SIP", ru: "CIP/SIP" },
@@ -640,7 +640,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Precision equipment with full documentation packages for validated processes.",
     descRu:
-      "Прецизионное оборудование с полными пакетами документации для валидированных процессов.",
+      "Высокоточное оборудование с полным комплектом документации для процессов, соответствующих квалифицированным стандартам.",
     tags: [
       { en: "GMP", ru: "GMP" },
       { en: "Validation", ru: "Валидация" },
@@ -651,11 +651,11 @@ export const INDUSTRIES: IndustrySeed[] = [
   {
     slug: "hydrogen",
     titleEn: "Hydrogen",
-    titleRu: "Водород",
+    titleRu: "Водородная энергетика",
     descEn:
       "Compression, sealing and flow-control equipment for hydrogen production and transport.",
     descRu:
-      "Компрессорное, уплотнительное и регулирующее оборудование для производства и транспортировки водорода.",
+      "Оборудование для компрессии, уплотнения и управления потоками при производстве и транспортировке водорода.",
     tags: [
       { en: "Electrolyzers", ru: "Электролизёры" },
       { en: "Compression", ru: "Компримирование" },
@@ -670,7 +670,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Cooling pumps, valves and monitoring equipment supporting critical compute infrastructure.",
     descRu:
-      "Насосы охлаждения, арматура и мониторинг для критической вычислительной инфраструктуры.",
+      "Насосы охлаждения, клапаны и системы мониторинга для обеспечения надёжной работы критически важной вычислительной инфраструктуры.",
     tags: [
       { en: "Cooling loops", ru: "Контуры охлаждения" },
       { en: "Redundancy", ru: "Резервирование" },
@@ -685,7 +685,7 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Pumps, seals and spare-parts programs for marine propulsion and offshore support systems.",
     descRu:
-      "Насосы, уплотнения и программы запчастей для судовых силовых и офшорных систем.",
+      "Насосы, уплотнения и программы поставки запчастей для судовых силовых установок и морских вспомогательных систем.",
     tags: [
       { en: "Propulsion", ru: "Пропульсия" },
       { en: "Ballast systems", ru: "Балластные системы" },
@@ -700,11 +700,11 @@ export const INDUSTRIES: IndustrySeed[] = [
     descEn:
       "Engineering supply for utilities, transport and municipal infrastructure projects.",
     descRu:
-      "Инженерные поставки для коммунальных, транспортных и муниципальных инфраструктурных проектов.",
+      "Инженерное обеспечение и поставка оборудования для проектов в области коммунальной инфраструктуры, транспорта и муниципальных объектов.",
     tags: [
       { en: "Utilities", ru: "ЖКХ" },
-      { en: "EPC support", ru: "Поддержка EPC" },
-      { en: "Commissioning", ru: "Пусконаладка" },
+      { en: "EPC support", ru: "Поддержка EPC-проектов" },
+      { en: "Commissioning", ru: "Пусконаладочные работы" },
     ],
     image: "https://images.unsplash.com/photo-1467533003447-e295ff1b0435?w=1600&q=80",
   },
@@ -859,7 +859,7 @@ export const SITE: SiteContent = {
   footer: {
     blurb: {
       en: "International supplier and lifecycle partner for critical rotating equipment, sealing systems, valves and compressors.",
-      ru: "Международный поставщик и партнёр жизненного цикла критического вращающегося оборудования, уплотнительных систем, арматуры и компрессоров.",
+      ru: "Международный поставщик и комплексный партнёр по жизненному циклу вращающегося оборудования, уплотнительных систем, арматуры и компрессорного оборудования.",
     },
     productLinks: [
       { en: "Mechanical Seals", ru: "Торцевые уплотнения", href: "/products" },
@@ -1035,7 +1035,7 @@ export const SITE: SiteContent = {
   about: {
     title: {
       en: "Built on engineering. Driven by reliability.",
-      ru: "Основаны на инженерии. Движимы надёжностью.",
+      ru: "Инженерная основа. Движимы надёжностью.",
     },
     lead: {
       en: "Our mission is to keep the world’s critical industries running — through engineering excellence, reliable equipment and long-term partnership at every stage of the asset lifecycle.",

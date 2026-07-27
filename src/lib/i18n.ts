@@ -23,6 +23,31 @@ export function field<T extends Record<string, unknown>>(row: T, base: string, l
   return (val as string) || (en as string) || "";
 }
 
+// Localize a short stat value like "21 days" or "2 yr" into Russian with correct
+// pluralization. Pure numbers/units without English words ("14", "120 MW") pass
+// through unchanged. English locale is returned as-is.
+export function localizeStat(v: string, locale: Locale): string {
+  if (locale !== "ru" || !v) return v;
+  const m = v.match(/^(\d+)\s*(days?|yrs?|years?|months?|weeks?|hours?|hrs?)$/i);
+  if (!m) return v;
+  const n = parseInt(m[1], 10);
+  const u = m[2].toLowerCase();
+  const pl = (one: string, few: string, many: string) => {
+    const a = Math.abs(n) % 100;
+    if (a >= 11 && a <= 14) return many;
+    const d = a % 10;
+    return d === 1 ? one : d >= 2 && d <= 4 ? few : many;
+  };
+  let unit = "";
+  if (u.startsWith("day")) unit = pl("день", "дня", "дней");
+  else if (u.startsWith("yr") || u.startsWith("year")) unit = pl("год", "года", "лет");
+  else if (u.startsWith("month")) unit = pl("месяц", "месяца", "месяцев");
+  else if (u.startsWith("week")) unit = pl("неделя", "недели", "недель");
+  else if (u.startsWith("h")) unit = pl("час", "часа", "часов");
+  else return v;
+  return `${n} ${unit}`;
+}
+
 // The <html lang> value + hreflang code (en/ru map directly).
 export const HTML_LANG: Record<Locale, string> = { en: "en", ru: "ru" };
 

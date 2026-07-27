@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { isLocale, field, type Locale } from "@/lib/i18n";
+import { isLocale, field, localizeStat, type Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 import { buildMetadata } from "@/lib/seo";
 import { getProjects } from "@/lib/site-data";
@@ -113,7 +113,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                   </div>
                   <div>
                     <span style={{ display: "block", fontSize: "clamp(26px,6vw,40px)", fontWeight: 700, letterSpacing: "-.02em", color: "#fff" }}>
-                      {pr.stat1}
+                      {localizeStat(pr.stat1, locale)}
                     </span>
                     <span
                       className="mono"
@@ -124,7 +124,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                   </div>
                   <div>
                     <span style={{ display: "block", fontSize: "clamp(26px,6vw,40px)", fontWeight: 700, letterSpacing: "-.02em", color: "#fff" }}>
-                      {pr.stat2}
+                      {localizeStat(pr.stat2, locale)}
                     </span>
                     <span
                       className="mono"
