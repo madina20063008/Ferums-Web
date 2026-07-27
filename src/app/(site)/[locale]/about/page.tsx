@@ -94,7 +94,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="container">
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
           <h1 className="h1 reveal" style={{ maxWidth: 1000 }}>{t.title}</h1>
-          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.75)", maxWidth: 620 }}>{t.lead}</p>
         </div>
       </section>
 

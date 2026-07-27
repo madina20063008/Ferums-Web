@@ -1,6 +1,17 @@
-// Sets the theme before first paint to avoid a flash. Reads localStorage
-// ("ferums-theme"), falling back to the OS preference. Runs inline in <head>.
+"use client";
+
+import { useEffect } from "react";
+
+// Applies the saved theme ("ferums-theme" in localStorage, else OS preference)
+// on mount. Done in a client effect instead of an inline <script> so React
+// never renders a <script> element in the tree (which warns on re-render).
 export function ThemeScript() {
-  const js = `(function(){try{var t=localStorage.getItem('ferums-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
-  return <script dangerouslySetInnerHTML={{ __html: js }} />;
+  useEffect(() => {
+    try {
+      let t = localStorage.getItem("ferums-theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", t);
+    } catch {}
+  }, []);
+  return null;
 }

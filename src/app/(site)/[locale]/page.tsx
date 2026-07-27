@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale, pick, field, type Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 import { buildMetadata } from "@/lib/seo";
-import { getSite, getIndustries, getServices, getProducts, getProjects, getArticles, getPartners } from "@/lib/site-data";
+import { getSite, getIndustries, getServices, getProjects, getPartners } from "@/lib/site-data";
 import { HeroVideo } from "@/components/site/HeroVideo";
 
 // Faithful port of Home.dc.html. Static section copy is bilingual below; the
@@ -22,6 +22,16 @@ const T = {
     indLabel: "Industries", indTitle: "Where FERUMS operates.",
     solLabel: "Services", solTitle: "The complete equipment lifecycle.",
     prodLabel: "Products", prodTitle: "Critical equipment from world-leading OEMs.", prodLink: "All products",
+    products: [
+      { title: "Mechanical Seals", desc: "API 682 sealing systems for pumps and mixers." },
+      { title: "Dry Gas Seals", desc: "Non-contact sealing for turbocompressors." },
+      { title: "Industrial Pumps", desc: "API 610 process and utility pumps." },
+      { title: "Steam Turbines", desc: "API 611/612 drive turbines." },
+      { title: "Process Compressors", desc: "API 618, screw and reciprocating units." },
+      { title: "Industrial Valves", desc: "Ball, gate, butterfly, control and safety valves." },
+      { title: "Industrial Bearings", desc: "Precision bearings for heavy rotating duty." },
+      { title: "Spare Parts & Actuators", desc: "OEM spares and valve automation." },
+    ],
     lcLabel: "Engineering lifecycle", lcTitle: "Engineering across the entire asset lifecycle.",
     lcSteps: ["Concept", "Engineering", "Design", "Manufacturing", "Factory testing", "Logistics", "Installation", "Commissioning", "Operation", "Predictive maintenance", "Modernization", "Lifecycle support"],
     stats: [{ n: "18+", label: "Years of engineering" }, { n: "50+", label: "Equipment categories" }, { n: "20+", label: "Industrial sectors" }, { n: "100+", label: "Engineering projects" }, { n: "24/7", label: "Technical support" }],
@@ -41,6 +51,11 @@ const T = {
     offices: ["Astana", "Dubai", "Frankfurt", "Singapore", "Houston"],
     partnersLabel: "Trusted by industry leaders",
     newsTitle: "Latest from FERUMS.", newsLink: "All news",
+    news: [
+      { title: "FERUMS engineers certified to API 682", tag: "Quality", date: "Jul 2026", img: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1600&q=80" },
+      { title: "New regional hub opens in Dubai", tag: "Global", date: "Jun 2026", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80" },
+      { title: "API 618 compressor package delivered", tag: "Oil & Gas", date: "May 2026", img: "https://images.unsplash.com/photo-1726731782158-fcf6822b6ca4?w=1600&q=80" },
+    ],
     ctaTitle: "Core Strength. Future Energy.", ctaBtn1: "Contact FERUMS", ctaBtn2: "Explore Services",
   },
   ru: {
@@ -54,6 +69,16 @@ const T = {
     indLabel: "Отрасли", indTitle: "Где работает FERUMS.",
     solLabel: "Услуги", solTitle: "Полный жизненный цикл оборудования.",
     prodLabel: "Продукция", prodTitle: "Критическое оборудование ведущих мировых производителей.", prodLink: "Вся продукция",
+    products: [
+      { title: "Торцевые уплотнения", desc: "Уплотнительные системы API 682 для насосов и мешалок." },
+      { title: "Сухие газовые уплотнения", desc: "Бесконтактные уплотнения для турбокомпрессоров." },
+      { title: "Промышленные насосы", desc: "Технологические и вспомогательные насосы API 610." },
+      { title: "Паровые турбины", desc: "Приводные турбины API 611/612." },
+      { title: "Технологические компрессоры", desc: "Поршневые API 618, винтовые и специальные." },
+      { title: "Промышленная арматура", desc: "Шаровая, задвижки, дисковая, регулирующая и предохранительная." },
+      { title: "Промышленные подшипники", desc: "Прецизионные подшипники для тяжёлых режимов." },
+      { title: "Запчасти и приводы", desc: "Оригинальные запчасти и автоматизация арматуры." },
+    ],
     lcLabel: "Жизненный цикл", lcTitle: "Инжиниринг на всём жизненном цикле актива.",
     lcSteps: ["Концепция", "Инжиниринг", "Проектирование", "Производство", "Заводские испытания", "Логистика", "Монтаж", "Пусконаладка", "Эксплуатация", "Предиктивное обслуживание", "Модернизация", "Сопровождение"],
     stats: [{ n: "18+", label: "Лет инжиниринга" }, { n: "50+", label: "Категорий оборудования" }, { n: "20+", label: "Отраслей" }, { n: "100+", label: "Инженерных проектов" }, { n: "24/7", label: "Техническая поддержка" }],
@@ -73,6 +98,11 @@ const T = {
     offices: ["Астана", "Дубай", "Франкфурт", "Сингапур", "Хьюстон"],
     partnersLabel: "Нам доверяют лидеры отрасли",
     newsTitle: "Новости FERUMS.", newsLink: "Все новости",
+    news: [
+      { title: "Инженеры FERUMS сертифицированы по API 682", tag: "Качество", date: "Июл 2026", img: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1600&q=80" },
+      { title: "Открыт региональный хаб в Дубае", tag: "Глобально", date: "Июн 2026", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80" },
+      { title: "Поставлен компрессорный пакет API 618", tag: "Нефть и газ", date: "Май 2026", img: "https://images.unsplash.com/photo-1726731782158-fcf6822b6ca4?w=1600&q=80" },
+    ],
     ctaTitle: "Core Strength. Future Energy.", ctaBtn1: "Связаться с FERUMS", ctaBtn2: "Наши услуги",
   },
 } as const;
@@ -91,10 +121,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const t = T[locale];
-  const [industries, services, products, projects, articles, partners] = await Promise.all([
-    getIndustries(), getServices(), getProducts(), getProjects(), getArticles(), getPartners(),
+  const [industries, services, projects, partners] = await Promise.all([
+    getIndustries(), getServices(), getProjects(), getPartners(),
   ]);
   const marquee = [...partners, ...partners]; // duplicated for a seamless loop
+  // The design's home shows these four industries in this order.
+  const HOME_INDUSTRIES = ["oil-gas", "power-generation", "petrochemical-chemical", "mining-metallurgy"];
+  const picked = HOME_INDUSTRIES.map((s) => industries.find((i) => i.slug === s)).filter(Boolean) as typeof industries;
+  const homeIndustries = picked.length === 4 ? picked : industries.slice(0, 4);
 
   return (
     <>
@@ -139,7 +173,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           {label(t.indLabel)}
           <h2 className="h2 reveal" style={{ margin: "0 0 72px", maxWidth: 700 }}>{t.indTitle}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }} className="grid-2">
-            {industries.slice(0, 4).map((it) => (
+            {homeIndustries.map((it) => (
               <Link key={it.id} href={localized(locale, "/industries")} className="reveal" style={{ position: "relative", display: "block", borderRadius: 20, overflow: "hidden", aspectRatio: "16/9", background: "var(--card)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={it.image} alt={field(it, "title", locale)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
@@ -186,13 +220,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <Link href={localized(locale, "/products")} className="reveal" style={{ flexShrink: 0, fontSize: 16, fontWeight: 600, color: "var(--green)" }}>{t.prodLink} →</Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }} className="grid-4">
-            {products.slice(0, 8).map((p) => (
-              <Link key={p.id} href={localized(locale, `/products/${p.slug}`)} className="reveal card card-hover" style={{ display: "block", padding: "32px 28px", borderRadius: 20, background: "var(--card)" }}>
+            {t.products.map((p, i) => (
+              <Link key={i} href={localized(locale, "/products")} className="reveal card card-hover" style={{ display: "block", padding: "32px 28px", borderRadius: 20, background: "var(--card)" }}>
                 <span style={{ display: "block", width: 36, height: 36, border: "1.5px solid var(--green)", borderRadius: 9, marginBottom: 24, position: "relative" }}>
                   <span style={{ position: "absolute", inset: 9, border: "1.5px solid rgba(127,127,127,.4)", borderRadius: 4 }} />
                 </span>
-                <span style={{ display: "block", fontSize: 19, fontWeight: 600, color: "var(--text)" }}>{field(p, "title", locale)}</span>
-                <span style={{ display: "block", marginTop: 8, fontSize: 14, lineHeight: 1.55, color: "var(--text-dim)" }}>{field(p, "spec", locale) || field(p, "category", locale)}</span>
+                <span style={{ display: "block", fontSize: 19, fontWeight: 600, color: "var(--text)" }}>{p.title}</span>
+                <span style={{ display: "block", marginTop: 8, fontSize: 14, lineHeight: 1.55, color: "var(--text-dim)" }}>{p.desc}</span>
               </Link>
             ))}
           </div>
@@ -326,14 +360,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <Link href={localized(locale, "/news")} className="reveal" style={{ fontSize: 16, fontWeight: 600, color: "var(--green)", flexShrink: 0 }}>{t.newsLink} →</Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 32 }} className="grid-3">
-            {articles.slice(0, 3).map((a) => (
-              <Link key={a.id} href={localized(locale, `/news/${a.slug}`)} className="reveal" style={{ display: "block" }}>
+            {t.news.map((a, i) => (
+              <Link key={i} href={localized(locale, "/news")} className="reveal" style={{ display: "block" }}>
                 <span style={{ display: "block", borderRadius: 20, overflow: "hidden", aspectRatio: "3/2", marginBottom: 24 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={a.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <img src={a.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </span>
-                <span className="mono" style={{ fontSize: 12, letterSpacing: ".18em", textTransform: "uppercase", color: "var(--green)" }}>{field(a, "tag", locale)} · {field(a, "date", locale)}</span>
-                <span style={{ display: "block", marginTop: 12, fontSize: 22, fontWeight: 600, lineHeight: 1.3, color: "var(--text)", letterSpacing: "-.01em" }}>{field(a, "title", locale)}</span>
+                <span className="mono" style={{ fontSize: 12, letterSpacing: ".18em", textTransform: "uppercase", color: "var(--green)" }}>{a.tag} · {a.date}</span>
+                <span style={{ display: "block", marginTop: 12, fontSize: 22, fontWeight: 600, lineHeight: 1.3, color: "var(--text)", letterSpacing: "-.01em" }}>{a.title}</span>
               </Link>
             ))}
           </div>

@@ -42,11 +42,9 @@ export const HERO_MEDIA: Record<string, HeroMedia> = {
     ],
   },
   sustainability: {
-    // Added: aerial wind turbines + solar panels (direct, reliable mp4).
-    poster: "https://images.pexels.com/videos/9789882/4-k-aerial-shot-battery-bird-eye-view-9789882.jpeg?auto=compress&w=1600",
-    sources: [
-      { src: "https://videos.pexels.com/video-files/9789882/9789882-uhd_2560_1440_30fps.mp4", type: "video/mp4" },
-    ],
+    // Original design: a static wind-turbines-at-sunset image (no video).
+    poster: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=2400&q=80",
+    sources: [],
   },
   ferumsDigital: {
     poster: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=70",
