@@ -41,6 +41,17 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
   const rest = pathname.replace(/^\/(en|ru)(?=\/|$)/, "") || "";
   const other: Locale = locale === "en" ? "ru" : "en";
 
+  // White wordmark for dark theme; dark-ink variant (…-dark.png) for light theme.
+  // Both are rendered and toggled via CSS so it works before hydration.
+  const logoDark = nav.logo;
+  const logoLight = nav.logo.replace(/(\.[a-z0-9]+)$/i, "-dark$1");
+  const renderLogo = (w: number, h: number, hpx: number, priority = false) => (
+    <>
+      <Image className="logo-on-dark" src={logoDark} alt={nav.siteName} width={w} height={h} priority={priority} style={{ height: hpx, width: "auto" }} />
+      <Image className="logo-on-light" src={logoLight} alt={nav.siteName} width={w} height={h} priority={priority} style={{ height: hpx, width: "auto" }} />
+    </>
+  );
+
   const isActive = (href: string) => {
     const full = localized(locale, href);
     return pathname === full || pathname.startsWith(full + "/");
@@ -96,7 +107,7 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
       {/* Mobile top bar */}
       <div className="site-topbar">
         <Link href={localized(locale, "/")} aria-label={nav.siteName}>
-          <Image src={nav.logo} alt={nav.siteName} width={120} height={40} style={{ height: 40, width: "auto" }} />
+          {renderLogo(120, 40, 40)}
         </Link>
         <button onClick={() => setOpen(true)} aria-label="Menu" style={{ background: "none", border: "none", color: "var(--text)", fontSize: 26, cursor: "pointer" }}>☰</button>
       </div>
@@ -105,7 +116,7 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
 
       <nav className={`site-sidebar${open ? " open" : ""}`} aria-label="Primary">
         <Link href={localized(locale, "/")} style={{ display: "block", padding: "0 10px", marginBottom: 40 }} aria-label={nav.siteName}>
-          <Image src={nav.logo} alt={nav.siteName} width={160} height={80} priority style={{ height: 72, width: "auto" }} />
+          {renderLogo(160, 80, 72, true)}
         </Link>
         <NavLinks />
         <Controls />

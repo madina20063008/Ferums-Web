@@ -142,6 +142,11 @@ body {
 
 img { max-width: 100%; }
 
+/* Theme-aware logo: white wordmark on dark, dark-ink wordmark on light. */
+.logo-on-light { display: none; }
+[data-theme="light"] .logo-on-dark { display: none; }
+[data-theme="light"] .logo-on-light { display: block; }
+
 /* ===== Responsive grid collapses =====
    These override the inline `grid-template-columns` on the affected blocks
    (inline styles beat plain class rules, so !important is required here). */
