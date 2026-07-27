@@ -136,9 +136,9 @@ body {
 @media (max-width: 1024px) { .section { padding: 96px 0; } }
 @media (max-width: 640px) { .section { padding: 72px 0; } }
 
-.h1 { font-size: clamp(48px, 7vw, 96px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; margin: 0; }
-.h2 { font-size: clamp(34px, 4.4vw, 52px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
-.lead { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.6; color: var(--text-dim); }
+.h1 { font-size: clamp(34px, 6.4vw, 62px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; margin: 0; }
+.h2 { font-size: clamp(28px, 4.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
+.lead { font-size: clamp(14px, 1.2vw, 16px); line-height: 1.65; color: var(--text-dim); }
 
 /* Reveal on scroll */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1); }
@@ -199,15 +199,30 @@ img { max-width: 100%; }
   .form-2 { grid-template-columns: 1fr !important; }
 }
 
-/* Home page grids */
+/* Content grids collapse responsively.
+   `.stack-sm` is a generic hook for any unequal 2/3/4-column content split
+   (hero splits, list rows, timelines) that should become a single column. */
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
   .grid-5 { grid-template-columns: repeat(3, 1fr) !important; }
   .grid-lc { grid-template-columns: repeat(4, 1fr) !important; }
 }
+@media (max-width: 900px) {
+  .two-col, .split-2, .stack-sm { grid-template-columns: 1fr !important; gap: 28px !important; align-items: start !important; }
+  .stack-sm .btn { justify-self: start !important; }
+  /* Services card: image flush above the copy; give the image a real height and
+     top-align the copy so it doesn't float in a tall stacked cell. */
+  .card.split-2 { gap: 0 !important; }
+  .svc-img { min-height: 0 !important; aspect-ratio: 16 / 10; }
+  .svc-content { justify-content: flex-start !important; padding: 30px 26px !important; }
+}
 @media (max-width: 760px) {
   .who-2, .grid-2, .grid-3 { grid-template-columns: 1fr !important; gap: 40px !important; }
   .grid-4, .grid-5, .grid-lc { grid-template-columns: repeat(2, 1fr) !important; }
   .svc-row { grid-template-columns: 1fr !important; gap: 8px !important; padding: 26px 24px !important; }
+  .project-card-grid { grid-template-columns: 1fr !important; gap: 20px !important; padding: 32px 26px !important; }
+}
+@media (max-width: 460px) {
+  .grid-4, .grid-5, .grid-lc { grid-template-columns: 1fr !important; }
 }
 

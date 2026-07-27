@@ -18,7 +18,7 @@ export function PageHeader({
   );
   if (video) {
     return (
-      <header className="section video-hero hero-onvideo" style={{ paddingTop: 112, paddingBottom: 72, minHeight: "56vh", display: "flex", alignItems: "center" }}>
+      <header className="section video-hero hero-onvideo" style={{ paddingTop: 112, paddingBottom: 72, minHeight: "88vh", display: "flex", alignItems: "center" }}>
         <HeroVideo media={video} />
         {body}
       </header>

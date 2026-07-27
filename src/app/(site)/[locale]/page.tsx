@@ -41,7 +41,7 @@ const T = {
     offices: ["Astana", "Dubai", "Frankfurt", "Singapore", "Houston"],
     partnersLabel: "Trusted by industry leaders",
     newsTitle: "Latest from FERUMS.", newsLink: "All news",
-    ctaTitle: "Engineering the future of energy.", ctaTag: "Core Strength. Future Energy.", ctaBtn1: "Contact FERUMS", ctaBtn2: "Explore Services",
+    ctaTitle: "Core Strength. Future Energy.", ctaBtn1: "Contact FERUMS", ctaBtn2: "Explore Services",
   },
   ru: {
     kicker: "Проектируем промышленную инфраструктуру будущего",
@@ -73,7 +73,7 @@ const T = {
     offices: ["Астана", "Дубай", "Франкфурт", "Сингапур", "Хьюстон"],
     partnersLabel: "Нам доверяют лидеры отрасли",
     newsTitle: "Новости FERUMS.", newsLink: "Все новости",
-    ctaTitle: "Проектируем будущее энергетики.", ctaTag: "Core Strength. Future Energy.", ctaBtn1: "Связаться с FERUMS", ctaBtn2: "Наши услуги",
+    ctaTitle: "Core Strength. Future Energy.", ctaBtn1: "Связаться с FERUMS", ctaBtn2: "Наши услуги",
   },
 } as const;
 
@@ -108,7 +108,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <span style={{ display: "block" }}>{t.heroL2}</span>
             <span style={{ display: "block" }}>{t.heroL3}</span>
           </h1>
-          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 20, lineHeight: 1.6, color: "rgba(255,255,255,.72)", maxWidth: 520 }}>{t.heroSub}</p>
+          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.72)", maxWidth: 520 }}>{t.heroSub}</p>
           <div className="reveal" style={{ display: "flex", gap: 16, marginTop: 48, flexWrap: "wrap" }}>
             <Link href={localized(locale, "/services")} className="btn btn-primary">{t.ctaSolutions}</Link>
             <Link href={localized(locale, "/contact")} className="btn btn-ghost">{t.ctaContact}</Link>
@@ -123,7 +123,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div>
             {label(t.whoLabel)}
             <h2 className="h2 reveal">{t.whoTitle}</h2>
-            <p className="reveal" style={{ margin: "28px 0 0", fontSize: 18, lineHeight: 1.75, color: "var(--text-dim)", maxWidth: 520 }}>{t.whoText}</p>
+            <p className="reveal" style={{ margin: "28px 0 0", fontSize: 15, lineHeight: 1.75, color: "var(--text-dim)", maxWidth: 520 }}>{t.whoText}</p>
             <Link href={localized(locale, "/about")} className="reveal" style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: 36, fontSize: 16, fontWeight: 600, color: "var(--green)" }}>{t.whoLink} →</Link>
           </div>
           <div className="reveal" style={{ borderRadius: 24, overflow: "hidden", aspectRatio: "4/3", background: "var(--card)" }}>
@@ -344,7 +344,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section style={{ position: "relative", overflow: "hidden", borderTop: "1px solid var(--border)", background: "radial-gradient(ellipse 60% 80% at 50% 120%,rgba(28,175,232,.18),transparent), var(--bg)" }}>
         <div className="container" style={{ paddingTop: 180, paddingBottom: 180, textAlign: "center" }}>
           <h2 className="reveal" style={{ margin: "0 auto", fontSize: "clamp(44px,5.5vw,80px)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.05, maxWidth: 900 }}>{t.ctaTitle}</h2>
-          <div className="eyebrow reveal" style={{ marginTop: 28 }}>{t.ctaTag}</div>
           <div className="reveal" style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 56, flexWrap: "wrap" }}>
             <Link href={localized(locale, "/contact")} className="btn btn-primary">{t.ctaBtn1}</Link>
             <Link href={localized(locale, "/services")} className="btn btn-ghost">{t.ctaBtn2}</Link>

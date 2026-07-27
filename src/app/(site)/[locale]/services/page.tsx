@@ -2,50 +2,105 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale, pick, field, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { getSite, getServices } from "@/lib/site-data";
-import { PageHeader } from "@/components/site/ui";
+import { getServices } from "@/lib/site-data";
+
+// Faithful port of Solutions.dc.html. Static hero copy is bilingual below; the
+// services list comes from the DB so the admin can manage it.
+const T = {
+  en: {
+    label: "Services",
+    title: "From selection to lifecycle support.",
+    intro:
+      "Six service lines, one engineering standard. Every FERUMS delivery is specified, inspected and supported through its full lifecycle.",
+  },
+  ru: {
+    label: "Услуги",
+    title: "От подбора до сопровождения жизненного цикла.",
+    intro:
+      "Шесть сервисных направлений, один инженерный стандарт. Каждая поставка FERUMS специфицируется, инспектируется и сопровождается на всём жизненном цикле.",
+  },
+} as const;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const loc: Locale = isLocale(locale) ? locale : "en";
-  const site = await getSite();
-  const s = site.sectionIntros.services;
-  return buildMetadata({
-    locale: loc,
-    path: "/services",
-    title: pick(s.title, loc),
-    description: pick(s.subtitle, loc),
-  });
+  const t = T[loc];
+  return buildMetadata({ locale: loc, path: "/services", title: t.title, description: t.intro });
 }
 
 export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  const [site, services] = await Promise.all([getSite(), getServices()]);
-  const s = site.sectionIntros.services;
+  const t = T[locale];
+  const services = await getServices();
 
   return (
     <>
-      <PageHeader title={pick(s.title, locale)} lead={pick(s.subtitle, locale)} />
-      <section className="section" style={{ paddingTop: 0 }}>
+      {/* Hero */}
+      <header className="section">
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 18 }}>
-            {services.map((sv) => {
-              const items = (sv.items as unknown as { en: string; ru: string }[]) || [];
-              return (
-                <div key={sv.id} className="card card-hover reveal" style={{ padding: "26px 24px" }}>
-                  <div className="mono" style={{ color: "var(--accent)", fontSize: 13 }}>{sv.numberTag}</div>
-                  <h3 style={{ margin: "12px 0 8px", fontSize: 20, fontWeight: 600 }}>{field(sv, "title", locale)}</h3>
-                  <p style={{ margin: 0, color: "var(--text-dim)", fontSize: 14, lineHeight: 1.6 }}>{field(sv, "desc", locale)}</p>
+          <div className="eyebrow reveal">{t.label}</div>
+          <h1 className="h1 reveal">{t.title}</h1>
+          <p
+            className="reveal"
+            style={{ marginTop: 22, fontSize: 16, lineHeight: 1.6, color: "var(--text-dim)", maxWidth: 640 }}
+          >
+            {t.intro}
+          </p>
+        </div>
+      </header>
+
+      {/* Service list */}
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+          {services.map((s) => {
+            const items = (s.items as unknown as { en: string; ru: string }[]) || [];
+            return (
+              <div
+                key={s.id}
+                className="reveal card card-hover split-2"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1.2fr",
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  background: "var(--card)",
+                  border: "1px solid var(--border)",
+                }}
+              >
+                <div className="svc-img" style={{ overflow: "hidden", minHeight: 320 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={s.image}
+                    alt={field(s, "title", locale)}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                </div>
+                <div className="svc-content" style={{ padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <span className="mono" style={{ fontSize: 13, color: "var(--text-faint)" }}>{s.numberTag}</span>
+                  <h2 style={{ margin: "14px 0 0", fontSize: "clamp(20px,4.2vw,34px)", fontWeight: 600, letterSpacing: "-.01em", color: "var(--text)" }}>
+                    {field(s, "title", locale)}
+                  </h2>
+                  <p style={{ margin: "16px 0 0", fontSize: 15, lineHeight: 1.75, color: "var(--text-dim)" }}>
+                    {field(s, "desc", locale)}
+                  </p>
                   {items.length > 0 && (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 18 }}>
-                      {items.map((item, i) => <span key={i} className="chip">{pick(item, locale)}</span>)}
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 28 }}>
+                      {items.map((item, i) => (
+                        <span
+                          key={i}
+                          className="mono"
+                          style={{ padding: "7px 14px", borderRadius: 99, border: "1px solid var(--border)", fontSize: 12, color: "var(--text-faint)" }}
+                        >
+                          {pick(item, locale)}
+                        </span>
+                      ))}
                     </div>
                   )}
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </section>
     </>

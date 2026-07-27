@@ -6,7 +6,6 @@ import { localized } from "@/lib/nav";
 import { buildMetadata } from "@/lib/seo";
 import { absUrl } from "@/lib/site";
 import { getProduct, getProducts, getSite } from "@/lib/site-data";
-import { Media } from "@/components/site/ui";
 import { JsonLd } from "@/components/site/JsonLd";
 
 export async function generateStaticParams() {
@@ -54,39 +53,54 @@ export default async function ProductDetail({ params }: { params: Promise<{ loca
   return (
     <>
       <JsonLd data={jsonLd} />
-      <section className="section" style={{ paddingBottom: 32 }}>
+
+      {/* Product hero */}
+      <section className="section" style={{ paddingBottom: 80 }}>
         <div className="container">
-          <Link href={localized(locale, "/products")} className="mono" style={{ color: "var(--text-dim)", fontSize: 13 }}>← {t.allProducts}</Link>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 44, marginTop: 28, alignItems: "start" }} className="two-col">
-            <div className="reveal">
-              {field(p, "category", locale) && <div className="eyebrow" style={{ marginBottom: 14 }}>{field(p, "category", locale)}</div>}
-              <h1 className="h1" style={{ fontSize: "clamp(36px,3.6vw,56px)" }}>{field(p, "title", locale)}</h1>
-              <p className="lead" style={{ marginTop: 20 }}>{field(p, "desc", locale)}</p>
+          {/* Breadcrumb */}
+          <div className="reveal mono" style={{ display: "flex", gap: 10, alignItems: "center", fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", marginBottom: 40 }}>
+            <Link href={localized(locale, "/products")} style={{ color: "var(--text-faint)" }}>{t.allProducts}</Link>
+            <span style={{ color: "var(--text-faint)" }}>/</span>
+            <span style={{ color: "var(--green)" }}>{field(p, "category", locale) || field(p, "title", locale)}</span>
+          </div>
+
+          <div className="two-col" style={{ display: "grid", gridTemplateColumns: "minmax(280px,1.1fr) minmax(0,1fr)", gap: 80, alignItems: "center" }}>
+            {/* Image */}
+            <div className="reveal" style={{ borderRadius: 24, overflow: "hidden", aspectRatio: "4 / 3", background: "var(--surface-alt)", border: "1px solid var(--border)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.image} alt={field(p, "title", locale)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
+
+            {/* Copy */}
+            <div>
+              {field(p, "category", locale) && (
+                <div className="reveal mono" style={{ fontSize: 13, letterSpacing: ".28em", textTransform: "uppercase", color: "var(--green)", marginBottom: 20 }}>{field(p, "category", locale)}</div>
+              )}
+              <h1 className="reveal h1" style={{ margin: 0, fontSize: "clamp(40px,3.8vw,56px)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.06 }}>{field(p, "title", locale)}</h1>
+              <p className="reveal" style={{ margin: "24px 0 0", fontSize: 15, lineHeight: 1.7, color: "var(--text-dim)" }}>{field(p, "desc", locale)}</p>
               {chips.length > 0 && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 24 }}>
+                <div className="reveal" style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 28 }}>
                   {chips.map((c, i) => <span key={i} className="chip">{pick(c, locale)}</span>)}
                 </div>
               )}
-              <div style={{ marginTop: 30 }}>
+              <div className="reveal" style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 40 }}>
                 <Link href={localized(locale, "/contact")} className="btn btn-primary">{t.getInTouch}</Link>
               </div>
-            </div>
-            <div className="reveal">
-              <Media src={p.image} alt={field(p, "title", locale)} ratio="4 / 3" />
             </div>
           </div>
         </div>
       </section>
 
+      {/* Specifications */}
       {specs.length > 0 && (
-        <section className="section" style={{ paddingTop: 0 }}>
-          <div className="container">
-            <h2 className="h2 reveal" style={{ marginBottom: 24 }}>{t.specifications}</h2>
-            <div className="card reveal" style={{ padding: "8px 24px" }}>
+        <section className="section section-alt">
+          <div className="container two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 80, alignItems: "start" }}>
+            <h2 className="h2 reveal">{t.specifications}</h2>
+            <div className="reveal" style={{ display: "flex", flexDirection: "column" }}>
               {specs.map((s, i) => (
-                <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 20, padding: "16px 0", borderBottom: i < specs.length - 1 ? "1px solid var(--border)" : "none" }}>
-                  <span style={{ color: "var(--text-dim)" }}>{pick({ en: s.kEn, ru: s.kRu }, locale)}</span>
-                  <span className="mono" style={{ fontWeight: 500, textAlign: "right" }}>{pick({ en: s.vEn, ru: s.vRu }, locale)}</span>
+                <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, padding: "20px 0", borderTop: "1px solid var(--border)" }}>
+                  <span style={{ fontSize: 15, color: "var(--text-dim)" }}>{pick({ en: s.kEn, ru: s.kRu }, locale)}</span>
+                  <span style={{ fontSize: 15, fontWeight: 500, color: "var(--text)" }}>{pick({ en: s.vEn, ru: s.vRu }, locale)}</span>
                 </div>
               ))}
             </div>
@@ -94,15 +108,19 @@ export default async function ProductDetail({ params }: { params: Promise<{ loca
         </section>
       )}
 
+      {/* Key features */}
       {features.length > 0 && (
-        <section className="section" style={{ paddingTop: 0 }}>
+        <section className="section">
           <div className="container">
-            <h2 className="h2 reveal" style={{ marginBottom: 24 }}>{t.keyFeatures}</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))", gap: 18 }}>
+            <h2 className="h2 reveal" style={{ marginBottom: 56 }}>{t.keyFeatures}</h2>
+            <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 32 }}>
               {features.map((f, i) => (
-                <div key={i} className="card reveal" style={{ padding: "24px 22px" }}>
-                  <h3 style={{ margin: "0 0 10px", fontSize: 18, fontWeight: 600 }}>{pick({ en: f.titleEn, ru: f.titleRu }, locale)}</h3>
-                  <p style={{ margin: 0, color: "var(--text-dim)", fontSize: 14, lineHeight: 1.6 }}>{pick({ en: f.descEn, ru: f.descRu }, locale)}</p>
+                <div key={i} className="card reveal" style={{ padding: 36, borderRadius: 20 }}>
+                  <span style={{ display: "block", width: 34, height: 34, border: "1.5px solid var(--green)", borderRadius: 9, marginBottom: 22, position: "relative" }}>
+                    <span style={{ position: "absolute", inset: 9, border: "1.5px solid rgba(127,127,127,.4)", borderRadius: 4 }} />
+                  </span>
+                  <h3 style={{ margin: 0, fontSize: 21, fontWeight: 600, color: "var(--text)" }}>{pick({ en: f.titleEn, ru: f.titleRu }, locale)}</h3>
+                  <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.7, color: "var(--text-dim)" }}>{pick({ en: f.descEn, ru: f.descRu }, locale)}</p>
                 </div>
               ))}
             </div>
@@ -110,17 +128,25 @@ export default async function ProductDetail({ params }: { params: Promise<{ loca
         </section>
       )}
 
+      {/* Related products */}
       {related.length > 0 && (
-        <section className="section" style={{ paddingTop: 0 }}>
+        <section className="section section-alt">
           <div className="container">
-            <h2 className="h2 reveal" style={{ marginBottom: 24 }}>{t.relatedProducts}</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))", gap: 18 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 56, gap: 24 }}>
+              <h2 className="h2 reveal">{t.relatedProducts}</h2>
+              <Link href={localized(locale, "/products")} className="reveal" style={{ flexShrink: 0, fontSize: 16, fontWeight: 600, color: "var(--green)" }}>{t.allProducts} →</Link>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 32 }}>
               {related.map((r) => (
-                <Link key={r.id} href={localized(locale, `/products/${r.slug}`)} className="card card-hover reveal" style={{ overflow: "hidden" }}>
-                  <Media src={r.image} alt={field(r, "title", locale)} ratio="4 / 3" radius={0} />
-                  <div style={{ padding: "18px 20px" }}>
-                    <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600 }}>{field(r, "title", locale)}</h3>
-                  </div>
+                <Link key={r.id} href={localized(locale, `/products/${r.slug}`)} className="card card-hover reveal" style={{ display: "block", overflow: "hidden", borderRadius: 20 }}>
+                  <span style={{ display: "block", aspectRatio: "16 / 10", overflow: "hidden" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={r.image} alt={field(r, "title", locale)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  </span>
+                  <span style={{ display: "block", padding: "24px 28px 28px" }}>
+                    <span style={{ display: "block", fontSize: 20, fontWeight: 600, color: "var(--text)" }}>{field(r, "title", locale)}</span>
+                    <span className="mono" style={{ display: "block", marginTop: 8, fontSize: 12, letterSpacing: ".14em", color: "var(--text-faint)" }}>{field(r, "spec", locale) || field(r, "category", locale)}</span>
+                  </span>
                 </Link>
               ))}
             </div>

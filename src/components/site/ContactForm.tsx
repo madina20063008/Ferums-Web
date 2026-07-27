@@ -31,7 +31,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
   if (status === "ok") {
     return (
       <div className="card" style={{ padding: 28, borderColor: "rgba(28,175,232,.4)" }}>
-        <p style={{ margin: 0, fontSize: 16 }}>{t.success}</p>
+        <p style={{ margin: 0, fontSize: 15 }}>{t.success}</p>
       </div>
     );
   }
