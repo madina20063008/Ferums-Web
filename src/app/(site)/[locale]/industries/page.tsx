@@ -40,7 +40,7 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
       {/* Hero */}
       <section
         className="video-hero hero-onvideo"
-        style={{ position: "relative", minHeight: "88vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="industries" />
         <div className="container">

@@ -44,11 +44,11 @@ const T = {
       { code: "FAT / NDT", title: "Testing & inspection", desc: "Factory acceptance tests, non-destructive testing and independent inspection." },
       { code: "MTC 3.1", title: "Material traceability", desc: "EN 10204 3.1 material certificates and full documentation packages." },
     ],
-    whyTitle: "Why global industries choose FERUMS.",
+    whyTitle: "What sets FERUMS apart?",
     whyItems: ["Engineering expertise", "International standards", "OEM partnerships", "Quality assurance", "Fast project delivery", "Lifecycle support", "Experienced engineers", "Global supply chain", "Precision manufacturing", "Reliable performance"],
     projLabel: "Featured projects", projTitle: "Delivered worldwide.",
     globalLabel: "Global presence", globalTitle: "Operating across 27 countries on 4 continents.",
-    offices: ["Astana", "Dubai", "Frankfurt", "Singapore", "Houston"],
+    offices: ["Tashkent", "Dubai", "Istanbul", "Kuala Lumpur", "Houston"],
     partnersLabel: "Trusted by industry leaders",
     newsTitle: "Latest from FERUMS.", newsLink: "All news",
     news: [
@@ -91,11 +91,11 @@ const T = {
       { code: "FAT / НК", title: "Испытания и инспекция", desc: "Заводские приёмочные испытания, неразрушающий контроль и независимая инспекция." },
       { code: "MTC 3.1", title: "Прослеживаемость материалов", desc: "Сертификаты на материалы EN 10204 3.1 и полные пакеты документации." },
     ],
-    whyTitle: "Почему мировые отрасли выбирают FERUMS.",
+    whyTitle: "Что отличает FERUMS?",
     whyItems: ["Инженерная экспертиза", "Международные стандарты", "OEM-партнёрства", "Гарантия качества", "Быстрая реализация проектов", "Сопровождение жизненного цикла", "Опытные инженеры", "Глобальная цепочка поставок", "Прецизионное производство", "Надёжная работа"],
     projLabel: "Ключевые проекты", projTitle: "Реализованы по всему миру.",
     globalLabel: "Глобальное присутствие", globalTitle: "Работаем в 27 странах на 4 континентах.",
-    offices: ["Астана", "Дубай", "Франкфурт", "Сингапур", "Хьюстон"],
+    offices: ["Ташкент", "Дубай", "Стамбул", "Куала-Лумпур", "Хьюстон"],
     partnersLabel: "Нам доверяют лидеры отрасли",
     newsTitle: "Новости FERUMS.", newsLink: "Все новости",
     news: [
@@ -137,12 +137,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <HeroVideo media="home" />
         <div className="container">
           <div className="eyebrow reveal" style={{ marginBottom: 28 }}>{t.kicker}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 1000 }}>
-            <span style={{ display: "block" }}>{t.heroL1}</span>
-            <span style={{ display: "block" }}>{t.heroL2}</span>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, fontSize: "clamp(32px,4.6vw,54px)" }}>
+            <span style={{ display: "block" }}>{t.heroL1} {t.heroL2}</span>
             <span style={{ display: "block" }}>{t.heroL3}</span>
           </h1>
-          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.72)", maxWidth: 520 }}>{t.heroSub}</p>
+          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.72)", maxWidth: 1040 }}>{t.heroSub}</p>
           <div className="reveal" style={{ display: "flex", gap: 16, marginTop: 48, flexWrap: "wrap" }}>
             <Link href={localized(locale, "/services")} className="btn btn-primary">{t.ctaSolutions}</Link>
             <Link href={localized(locale, "/contact")} className="btn btn-ghost">{t.ctaContact}</Link>
@@ -195,13 +194,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="section">
         <div className="container">
           {label(t.solLabel)}
-          <h2 className="h2 reveal" style={{ margin: "0 0 72px", maxWidth: 700 }}>{t.solTitle}</h2>
+          <h2 className="h2 reveal oneline" style={{ margin: "0 0 72px" }}>{t.solTitle}</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: 2, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border)" }}>
             {services.map((s) => (
-              <Link key={s.id} href={localized(locale, "/services")} className="reveal svc-row" style={{ display: "grid", gridTemplateColumns: "80px 1fr 2fr 60px", gap: 32, alignItems: "center", padding: "40px 48px", background: "var(--surface-alt)" }}>
-                <span className="mono" style={{ fontSize: 14, color: "var(--text-faint)" }}>{s.numberTag}</span>
-                <span style={{ fontSize: 26, fontWeight: 600, color: "var(--text)", letterSpacing: "-.01em" }}>{field(s, "title", locale)}</span>
-                <span style={{ fontSize: 16, lineHeight: 1.6, color: "var(--text-dim)" }}>{field(s, "desc", locale)}</span>
+              <Link key={s.id} href={localized(locale, "/services")} className="reveal svc-row" style={{ display: "grid", gridTemplateColumns: "1.1fr 2fr 60px", gap: 32, alignItems: "center", padding: "36px 48px", background: "var(--surface-alt)" }}>
+                <span style={{ fontSize: 24, fontWeight: 600, color: "var(--text)", letterSpacing: "-.01em" }}>{field(s, "title", locale)}</span>
+                <span style={{ fontSize: 15, lineHeight: 1.6, color: "var(--text-dim)" }}>{field(s, "desc", locale)}</span>
                 <span style={{ fontSize: 22, color: "var(--green)", textAlign: "right" }}>→</span>
               </Link>
             ))}
@@ -215,17 +213,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 72, gap: 40 }}>
             <div>
               {label(t.prodLabel)}
-              <h2 className="h2 reveal">{t.prodTitle}</h2>
+              <h2 className="h2 reveal oneline">{t.prodTitle}</h2>
             </div>
             <Link href={localized(locale, "/products")} className="reveal" style={{ flexShrink: 0, fontSize: 16, fontWeight: 600, color: "var(--green)" }}>{t.prodLink} →</Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }} className="grid-4">
             {t.products.map((p, i) => (
-              <Link key={i} href={localized(locale, "/products")} className="reveal card card-hover" style={{ display: "block", padding: "32px 28px", borderRadius: 20, background: "var(--card)" }}>
-                <span style={{ display: "block", width: 36, height: 36, border: "1.5px solid var(--green)", borderRadius: 9, marginBottom: 24, position: "relative" }}>
-                  <span style={{ position: "absolute", inset: 9, border: "1.5px solid rgba(127,127,127,.4)", borderRadius: 4 }} />
+              <Link key={i} href={localized(locale, "/products")} className="reveal card card-hover" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "36px 24px", borderRadius: 20, background: "var(--card)" }}>
+                <span style={{ display: "block", width: 40, height: 40, border: "1.5px solid var(--green)", borderRadius: 10, marginBottom: 22, position: "relative" }}>
+                  <span style={{ position: "absolute", inset: 10, border: "1.5px solid rgba(127,127,127,.4)", borderRadius: 4 }} />
                 </span>
-                <span style={{ display: "block", fontSize: 19, fontWeight: 600, color: "var(--text)" }}>{p.title}</span>
+                <span style={{ display: "block", fontSize: 18, fontWeight: 600, color: "var(--text)" }}>{p.title}</span>
                 <span style={{ display: "block", marginTop: 8, fontSize: 14, lineHeight: 1.55, color: "var(--text-dim)" }}>{p.desc}</span>
               </Link>
             ))}
@@ -237,12 +235,46 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="section" style={{ paddingBottom: 40 }}>
         <div className="container">
           {label(t.lcLabel)}
-          <h2 className="h2 reveal" style={{ margin: "0 0 64px", maxWidth: 820 }}>{t.lcTitle}</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 20 }} className="grid-lc">
+          <h2 className="h2 reveal oneline" style={{ margin: "0 0 64px" }}>{t.lcTitle}</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 16 }} className="grid-lc">
             {t.lcSteps.map((name, i) => (
-              <div key={i} className="reveal" style={{ borderTop: "1px solid var(--border-strong)", paddingTop: 18 }}>
-                <span className="mono" style={{ display: "block", fontSize: 12, color: "var(--green)" }}>{String(i + 1).padStart(2, "0")}</span>
-                <span style={{ display: "block", marginTop: 8, fontSize: 16, fontWeight: 600, color: "var(--text)" }}>{name}</span>
+              <div
+                key={i}
+                className="reveal card card-hover"
+                style={{
+                  position: "relative",
+                  padding: "22px 20px 24px",
+                  borderRadius: 16,
+                  background: "var(--card)",
+                  border: "1px solid var(--border)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 14,
+                  minHeight: 132,
+                  overflow: "hidden",
+                }}
+              >
+                <span
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background: "linear-gradient(90deg, var(--green), rgba(47,217,166,0))",
+                  }}
+                />
+                <span
+                  style={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: 99,
+                    background: "var(--green)",
+                    boxShadow: "0 0 0 5px rgba(47,217,166,.14)",
+                  }}
+                />
+                <span style={{ fontSize: 15.5, fontWeight: 600, color: "var(--text)", lineHeight: 1.32, marginTop: "auto" }}>{name}</span>
               </div>
             ))}
           </div>
@@ -267,8 +299,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
           {label(t.certLabel)}
-          <h2 className="h2 reveal" style={{ margin: "0 0 56px", maxWidth: 760 }}>{t.certTitle}</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 24 }}>
+          <h2 className="h2 reveal oneline" style={{ margin: "0 0 56px" }}>{t.certTitle}</h2>
+          <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
             {t.certs.map((c, i) => (
               <div key={i} className="reveal card card-hover" style={{ padding: "32px 28px", borderRadius: 20, background: "var(--surface-alt)" }}>
                 <span className="mono" style={{ display: "inline-flex", alignItems: "center", padding: "8px 14px", borderRadius: 8, border: "1.5px solid var(--green)", fontSize: 14, fontWeight: 500, letterSpacing: ".08em", color: "var(--green)", marginBottom: 20 }}>{c.code}</span>
@@ -283,11 +315,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Why FERUMS */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <h2 className="h2 reveal" style={{ margin: "0 0 56px", maxWidth: 820 }}>{t.whyTitle}</h2>
+          <h2 className="h2 reveal oneline" style={{ margin: "0 0 56px" }}>{t.whyTitle}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 20 }} className="grid-5">
             {t.whyItems.map((w, i) => (
-              <div key={i} className="reveal" style={{ padding: 24, borderRadius: 16, background: "var(--surface-alt)", border: "1px solid var(--border)" }}>
-                <span style={{ display: "block", width: 10, height: 10, borderRadius: 3, background: "var(--green)", marginBottom: 16 }} />
+              <div key={i} className="reveal card card-hover" style={{ padding: 24, borderRadius: 16, background: "var(--surface-alt)" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: 10, background: "rgba(47,217,166,.12)", color: "var(--green)", marginBottom: 16 }}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                </span>
                 <span style={{ display: "block", fontSize: 16, fontWeight: 600, lineHeight: 1.35, color: "var(--text)" }}>{w}</span>
               </div>
             ))}
@@ -325,7 +359,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(9,9,9,.9),rgba(9,9,9,.55) 50%,rgba(9,9,9,.95))" }} />
         <div className="container" style={{ position: "relative", paddingTop: 140, paddingBottom: 140, textAlign: "center" }}>
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.globalLabel}</div>
-          <h2 className="h2 reveal" style={{ margin: "0 auto", maxWidth: 760, color: "#fff" }}>{t.globalTitle}</h2>
+          <h2 className="h2 reveal oneline" style={{ margin: "0 auto", color: "#fff" }}>{t.globalTitle}</h2>
           <div className="reveal" style={{ display: "flex", justifyContent: "center", gap: 48, marginTop: 64, flexWrap: "wrap" }}>
             {t.offices.map((o, i) => (
               <span key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -340,13 +374,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Partners */}
       <section className="section" style={{ overflow: "hidden" }}>
         <div className="container">
-          <div className="eyebrow reveal" style={{ marginBottom: 48, textAlign: "center", color: "var(--text-faint)" }}>{t.partnersLabel}</div>
+          <h2 className="h2 reveal" style={{ textAlign: "center", marginBottom: 56 }}>{t.partnersLabel}</h2>
         </div>
-        <div style={{ display: "flex", gap: 64, width: "max-content", animation: "marquee 40s linear infinite", alignItems: "center" }}>
+        <div style={{ display: "flex", gap: 40, width: "max-content", animation: "marquee 45s linear infinite", alignItems: "center" }}>
           {marquee.map((p, i) => (
-            <span key={i} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: 64, background: "#fff", borderRadius: 12, padding: "0 26px", flexShrink: 0 }}>
+            <span key={i} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: 110, width: 220, background: "#fff", borderRadius: 16, padding: "0 32px", flexShrink: 0, boxShadow: "0 6px 20px rgba(0,0,0,.06)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              {p.logo ? <img src={p.logo} alt={p.name} style={{ maxHeight: 42, maxWidth: 150, objectFit: "contain" }} /> : <span style={{ fontWeight: 700, color: "#10141C" }}>{p.name}</span>}
+              {p.logo ? <img src={p.logo} alt={p.name} style={{ maxHeight: 70, maxWidth: 170, objectFit: "contain" }} /> : <span style={{ fontWeight: 700, fontSize: 20, color: "#10141C" }}>{p.name}</span>}
             </span>
           ))}
         </div>
@@ -377,7 +411,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* CTA */}
       <section style={{ position: "relative", overflow: "hidden", borderTop: "1px solid var(--border)", background: "radial-gradient(ellipse 60% 80% at 50% 120%,rgba(28,175,232,.18),transparent), var(--bg)" }}>
         <div className="container" style={{ paddingTop: 180, paddingBottom: 180, textAlign: "center" }}>
-          <h2 className="reveal" style={{ margin: "0 auto", fontSize: "clamp(44px,5.5vw,80px)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.05, maxWidth: 900 }}>{t.ctaTitle}</h2>
+          <h2 className="reveal oneline" style={{ margin: "0 auto", fontSize: "clamp(30px,5vw,52px)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.05 }}>{t.ctaTitle}</h2>
           <div className="reveal" style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 56, flexWrap: "wrap" }}>
             <Link href={localized(locale, "/contact")} className="btn btn-primary">{t.ctaBtn1}</Link>
             <Link href={localized(locale, "/services")} className="btn btn-ghost">{t.ctaBtn2}</Link>

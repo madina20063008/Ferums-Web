@@ -141,7 +141,7 @@ export default async function FerumsDigitalPage({ params }: { params: Promise<{ 
       {/* Hero */}
       <section
         className="video-hero hero-onvideo"
-        style={{ position: "relative", minHeight: "88vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="ferumsDigital" />
         <div className="container">
@@ -176,7 +176,7 @@ export default async function FerumsDigitalPage({ params }: { params: Promise<{ 
           </div>
           <div className="reveal" style={{ display: "flex", flexWrap: "wrap", gap: 10, alignContent: "center" }}>
             {t.engAreas.map((a, i) => (
-              <span key={i} className="mono chip" style={{ padding: "10px 18px", borderRadius: 99, border: "1px solid var(--border)", fontSize: 13, color: "var(--text-dim)" }}>{a}</span>
+              <span key={i} className="chip" style={{ padding: "10px 18px", borderRadius: 99, background: "var(--card)", border: "1px solid var(--border)", fontSize: 14, fontWeight: 500, color: "var(--text-dim)" }}>{a}</span>
             ))}
           </div>
         </div>
@@ -188,11 +188,13 @@ export default async function FerumsDigitalPage({ params }: { params: Promise<{ 
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.aiLabel}</div>
           <h2 className="h2 reveal" style={{ maxWidth: 820 }}>{t.aiTitle}</h2>
           <p className="reveal" style={{ margin: "26px 0 64px", fontSize: 15, lineHeight: 1.8, color: "var(--text-dim)", maxWidth: 720 }}>{t.aiText}</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 24 }}>
+          <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
             {t.aiApps.map((c, i) => (
               <div key={i} className="reveal card card-hover" style={{ padding: 32, borderRadius: 20, background: "var(--card)", border: "1px solid var(--border)" }}>
-                <span className="mono" style={{ display: "block", fontSize: 12, color: "var(--green)" }}>{c.num}</span>
-                <h3 style={{ margin: "14px 0 0", fontSize: 20, fontWeight: 600, color: "var(--text)" }}>{c.title}</h3>
+                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: 10, background: "rgba(47,217,166,.12)", color: "var(--green)", marginBottom: 16 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M9 12l2 2 4-4" /></svg>
+                </span>
+                <h3 style={{ margin: 0, fontSize: 20, fontWeight: 600, color: "var(--text)" }}>{c.title}</h3>
                 <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.7, color: "var(--text-dim)" }}>{c.desc}</p>
               </div>
             ))}
@@ -213,8 +215,8 @@ export default async function FerumsDigitalPage({ params }: { params: Promise<{ 
                   <span className="mono" style={{ display: "block", marginTop: 10, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--green)" }}>{p.tag}</span>
                 </div>
                 <div>
-                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.75, color: "var(--text-dim)" }}>{p.desc}</p>
-                  <p style={{ margin: "12px 0 0", fontSize: 14, lineHeight: 1.7, color: "var(--text-faint)" }}>{p.users}</p>
+                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.75, color: "var(--text)", fontWeight: 500 }}>{p.desc}</p>
+                  <p style={{ margin: "12px 0 0", fontSize: 14, lineHeight: 1.7, color: "var(--text)", opacity: 0.72 }}>{p.users}</p>
                 </div>
               </div>
             ))}
@@ -256,7 +258,7 @@ export default async function FerumsDigitalPage({ params }: { params: Promise<{ 
       {/* CTA */}
       <section style={{ position: "relative", overflow: "hidden", borderTop: "1px solid var(--border)", background: "radial-gradient(ellipse 60% 80% at 50% 120%,rgba(28,175,232,.18),transparent), var(--bg)" }}>
         <div className="container" style={{ paddingTop: 160, paddingBottom: 160, textAlign: "center" }}>
-          <h2 className="reveal" style={{ margin: "0 auto", fontSize: "clamp(40px,4.5vw,64px)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.05, maxWidth: 860 }}>{t.ctaTitle}</h2>
+          <h2 className="reveal" style={{ margin: "0 auto", fontSize: "clamp(28px,3.2vw,44px)", fontWeight: 700, letterSpacing: "-.03em", lineHeight: 1.08, maxWidth: 720 }}>{t.ctaTitle}</h2>
           <div className="reveal" style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 48 }}>
             <Link href={localized(locale, "/contact")} className="btn btn-primary">{t.ctaBtn}</Link>
           </div>

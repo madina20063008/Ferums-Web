@@ -42,13 +42,13 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
       {/* Hero */}
       <section
         className="video-hero hero-onvideo"
-        style={{ position: "relative", minHeight: "88vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="products" />
-        <div className="container">
+        <div className="container" style={{ textAlign: "center" }}>
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 900 }}>{t.title}</h1>
-          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.65, color: "rgba(255,255,255,.75)", maxWidth: 620 }}>{t.intro}</p>
+          <h1 className="h1 reveal" style={{ maxWidth: 820, margin: "0 auto", fontSize: "clamp(32px,4.6vw,56px)" }}>{t.title}</h1>
+          <p className="reveal" style={{ margin: "28px auto 0", fontSize: 16, lineHeight: 1.65, color: "rgba(255,255,255,.75)", maxWidth: 620 }}>{t.intro}</p>
         </div>
       </section>
 

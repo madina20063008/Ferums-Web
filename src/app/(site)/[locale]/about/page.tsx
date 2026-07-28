@@ -88,7 +88,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* Hero */}
       <section
         className="video-hero hero-onvideo"
-        style={{ position: "relative", minHeight: "88vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="about" />
         <div className="container">

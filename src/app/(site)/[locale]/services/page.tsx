@@ -43,7 +43,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
           <h1 className="h1 reveal">{t.title}</h1>
           <p
             className="reveal"
-            style={{ marginTop: 22, fontSize: 16, lineHeight: 1.6, color: "var(--text-dim)", maxWidth: 640 }}
+            style={{ marginTop: 22, fontSize: 16, lineHeight: 1.6, color: "var(--text)", opacity: 0.82, maxWidth: 640 }}
           >
             {t.intro}
           </p>
@@ -77,11 +77,10 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                   />
                 </div>
                 <div className="svc-content" style={{ padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                  <span className="mono" style={{ fontSize: 13, color: "var(--text-faint)" }}>{s.numberTag}</span>
-                  <h2 style={{ margin: "14px 0 0", fontSize: "clamp(20px,4.2vw,34px)", fontWeight: 600, letterSpacing: "-.01em", color: "var(--text)" }}>
+                  <h2 style={{ margin: 0, fontSize: "clamp(20px,4.2vw,32px)", fontWeight: 600, letterSpacing: "-.01em", color: "var(--text)" }}>
                     {field(s, "title", locale)}
                   </h2>
-                  <p style={{ margin: "16px 0 0", fontSize: 15, lineHeight: 1.75, color: "var(--text-dim)" }}>
+                  <p style={{ margin: "16px 0 0", fontSize: 15, lineHeight: 1.75, color: "var(--text)", opacity: 0.82 }}>
                     {field(s, "desc", locale)}
                   </p>
                   {items.length > 0 && (
@@ -90,7 +89,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                         <span
                           key={i}
                           className="mono"
-                          style={{ padding: "7px 14px", borderRadius: 99, border: "1px solid var(--border)", fontSize: 12, color: "var(--text-faint)" }}
+                          style={{ padding: "7px 14px", borderRadius: 99, border: "1px solid var(--border-strong)", fontSize: 12, color: "var(--text)" }}
                         >
                           {pick(item, locale)}
                         </span>

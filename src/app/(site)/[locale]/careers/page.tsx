@@ -60,7 +60,7 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
       {/* Hero */}
       <section
         className="video-hero hero-onvideo"
-        style={{ position: "relative", minHeight: "88vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="careers" />
         <div className="container">
@@ -88,8 +88,8 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
                     <span style={{ display: "block", fontSize: 20, fontWeight: 600, color: "var(--text)" }}>{field(r, "title", locale)}</span>
                     {desc ? <span style={{ display: "block", marginTop: 8, fontSize: 15, lineHeight: 1.6, color: "var(--text-dim)" }}>{desc}</span> : null}
                   </span>
-                  <span className="mono" style={{ fontSize: 13, letterSpacing: ".08em", color: "var(--text-faint)" }}>{field(r, "dept", locale)}</span>
-                  <span className="mono" style={{ fontSize: 13, letterSpacing: ".08em", color: "var(--text-faint)" }}>
+                  <span className="mono" style={{ fontSize: 13, letterSpacing: ".08em", color: "var(--text)" }}>{field(r, "dept", locale)}</span>
+                  <span className="mono" style={{ fontSize: 13, letterSpacing: ".08em", color: "var(--text)" }}>
                     {field(r, "location", locale)}{type ? ` · ${type}` : ""}
                   </span>
                   <Link href={localized(locale, "/contact")} className="btn btn-primary" style={{ justifySelf: "end" }}>{t.apply}</Link>

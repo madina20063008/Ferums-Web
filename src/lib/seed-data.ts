@@ -41,7 +41,7 @@ export const PRODUCTS: ProductSeed[] = [
       "Картриджные, разъёмные и газодинамические уплотнения для насосов, компрессоров и мешалок в тяжёлых условиях.",
     specEn: "API 682 · up to 450 °C",
     specRu: "API 682 · до 450 °C",
-    image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1769147339214-076740872485?w=800&q=80",
     chips: [
       { en: "API 682 Cat. 3", ru: "API 682 кат. 3" },
       { en: "up to 450 °C", ru: "до 450 °C" },
@@ -114,7 +114,7 @@ export const PRODUCTS: ProductSeed[] = [
       "Технологические насосы API 610 (OH, BB, VS), вспомогательные и шламовые насосы для непрерывной тяжёлой работы.",
     specEn: "API 610 12th ed.",
     specRu: "API 610, 12-я ред.",
-    image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1655874837055-7adc909ae602?w=800&q=80",
     chips: [],
     specs: [],
     features: [],
@@ -214,7 +214,7 @@ export const PRODUCTS: ProductSeed[] = [
       "Программы оригинальных запчастей с полной прослеживаемостью материалов и ускоренной поставкой.",
     specEn: "OEM traceability",
     specRu: "Прослеживаемость OEM",
-    image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1551609189-eba71b3a8566?w=800&q=80",
     chips: [],
     specs: [],
     features: [],
@@ -409,7 +409,7 @@ export const ARTICLES: ArticleSeed[] = [
       "Fourteen-pump package for copper concentration enters full operation ahead of schedule.",
     bodyRu:
       "Комплект из 14 насосов для медного обогащения вышел на полную мощность раньше срока.",
-    image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1644469757549-a82b610882fb?w=1200&q=80",
   },
   {
     slug: "ferums-engineers-certified-to-api-682",
@@ -588,7 +588,7 @@ export const INDUSTRIES: IndustrySeed[] = [
       { en: "Spares", ru: "Запчасти" },
       { en: "Maintenance", ru: "Сервис" },
     ],
-    image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1720670996646-2f5d69a10ee7?w=1600&q=80",
   },
   {
     slug: "water-treatment",
@@ -760,7 +760,7 @@ export const SERVICES: ServiceSeed[] = [
       { en: "Testing", ru: "Испытания" },
       { en: "Start-up", ru: "Пуск" },
     ],
-    image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1720670996646-2f5d69a10ee7?w=1600&q=80",
   },
   {
     slug: "maintenance-repair",
