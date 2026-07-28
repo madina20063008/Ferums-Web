@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 import { HeroVideo } from "@/components/site/HeroVideo";
-import type { HERO_MEDIA } from "@/lib/hero-media";
+import { HERO_MEDIA } from "@/lib/hero-media";
 
 // Page hero: mono eyebrow + big H1 + optional lead. Reused across every page.
 // Pass `video` to render it as a full-bleed background-video hero.
@@ -17,10 +17,15 @@ export function PageHeader({
     </div>
   );
   if (video) {
+    const hasLight = !!HERO_MEDIA[video]?.lightImage;
     return (
-      <header className="section video-hero hero-onvideo" style={{ paddingTop: 112, paddingBottom: 72, minHeight: "88vh", display: "flex", alignItems: "center" }}>
+      <header className={`section video-hero hero-onvideo${hasLight ? " hero-lightswap" : ""}`} style={{ position: "relative", overflow: "hidden", paddingTop: 112, paddingBottom: 72, minHeight: "100vh", display: "flex", alignItems: "center" }}>
         <HeroVideo media={video} />
-        {body}
+        <div className="container hero-center">
+          {eyebrow && <div className="eyebrow reveal" style={{ marginBottom: 18 }}>{eyebrow}</div>}
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, margin: "0 auto", fontSize: "clamp(30px,4vw,48px)" }}>{title}</h1>
+          {lead && <p className="lead reveal" style={{ margin: "22px auto 0", maxWidth: 1040 }}>{lead}</p>}
+        </div>
       </header>
     );
   }

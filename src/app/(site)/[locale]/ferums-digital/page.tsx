@@ -14,7 +14,7 @@ const T = {
     kicker: "Industrial AI Revolution",
     title: "Where mechanical engineering meets artificial intelligence.",
     intro:
-      "FERUMS DIGITAL is the technology organization inside FERUMS. It develops proprietary software platforms, enterprise applications and industrial AI — entirely in-house — so customers receive machines and intelligence from one engineering ecosystem.",
+      "FERUMS DIGITAL is our in-house technology arm — building proprietary software platforms, enterprise applications and industrial AI so customers get machines and intelligence from one engineering ecosystem.",
     divTitle: "One company. Hardware and software.",
     divText1:
       "Unlike traditional industrial suppliers, FERUMS combines mechanical engineering, industrial equipment, software engineering, data analytics and cloud technologies under one roof. Clients no longer buy equipment from one company and digital systems from another — they receive one integrated engineering ecosystem with a single point of responsibility.",
@@ -70,7 +70,7 @@ const T = {
     kicker: "Промышленная AI-революция",
     title: "Интеграция машиностроения и технологий искусственного интеллекта",
     intro:
-      "FERUMS DIGITAL – это технологическое подразделение компании FERUMS. Оно занимается разработкой собственных программных платформ, корпоративных приложений и промышленных решений на базе искусственного интеллекта — полностью внутри компании — обеспечивая заказчикам поставку оборудования и интеллектуальных систем в рамках единой инженерной экосистемы.",
+      "FERUMS DIGITAL — внутреннее технологическое подразделение FERUMS: собственные программные платформы, корпоративные приложения и промышленный ИИ, объединяющие оборудование и интеллектуальные системы в единой инженерной экосистеме.",
     divTitle: "Одна компания. Оборудование и софт.",
     divText1:
       "В отличие от традиционных промышленных поставщиков, FERUMS объединяет машиностроение, промышленное оборудование, разработку ПО, аналитику данных и облачные технологии под одной крышей. Клиенты больше не покупают оборудование у одной компании, а цифровые системы у другой — они получают единую инженерную экосистему с одной точкой ответственности.",
@@ -144,10 +144,10 @@ export default async function FerumsDigitalPage({ params }: { params: Promise<{ 
         style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="ferumsDigital" />
-        <div className="container">
+        <div className="container hero-center">
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.kicker}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 1000 }}>{t.title}</h1>
-          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.65, color: "rgba(255,255,255,.75)", maxWidth: 660 }}>{t.intro}</p>
+          <h1 className="h1 reveal" style={{ maxWidth: 1080, margin: "0 auto", fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
+          <p className="reveal" style={{ margin: "32px auto 0", fontSize: 15, lineHeight: 1.6, color: "rgba(255,255,255,.75)", maxWidth: 1080 }}>{t.intro}</p>
         </div>
       </section>
 

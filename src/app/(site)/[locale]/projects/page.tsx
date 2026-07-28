@@ -40,12 +40,12 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
     <>
       {/* Hero */}
       <header className="section">
-        <div className="container">
+        <div className="container hero-center">
           <div className="eyebrow reveal">{t.label}</div>
-          <h1 className="h1 reveal">{t.title}</h1>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
           <p
             className="reveal"
-            style={{ marginTop: 22, fontSize: 16, lineHeight: 1.6, color: "var(--text-dim)", maxWidth: 640 }}
+            style={{ marginTop: 22, fontSize: 15, lineHeight: 1.6, color: "var(--text-dim)", maxWidth: 1040 }}
           >
             {t.intro}
           </p>

@@ -33,7 +33,20 @@ const T = {
       { title: "Spare Parts & Actuators", desc: "OEM spares and valve automation." },
     ],
     lcLabel: "Engineering lifecycle", lcTitle: "Engineering across the entire asset lifecycle.",
-    lcSteps: ["Concept", "Engineering", "Design", "Manufacturing", "Factory testing", "Logistics", "Installation", "Commissioning", "Operation", "Predictive maintenance", "Modernization", "Lifecycle support"],
+    lcSteps: [
+      { name: "Concept", desc: "Innovative concepts tailored to your business goals." },
+      { name: "Engineering", desc: "Advanced engineering for safe, efficient, reliable solutions." },
+      { name: "Design", desc: "Smart, sustainable design optimized for performance." },
+      { name: "Manufacturing", desc: "Precision manufacturing to strict quality standards." },
+      { name: "Factory testing", desc: "Rigorous testing ensures reliability and safety." },
+      { name: "Logistics", desc: "Efficient global supply-chain delivery, on time." },
+      { name: "Installation", desc: "Professional installation by certified field teams." },
+      { name: "Commissioning", desc: "Seamless commissioning so systems run as intended." },
+      { name: "Operation", desc: "Reliable operation with real-time monitoring and support." },
+      { name: "Predictive maintenance", desc: "Data-driven insight predicts issues, prevents downtime." },
+      { name: "Modernization", desc: "Upgrades and retrofits extend asset life." },
+      { name: "Lifecycle support", desc: "Continuous support across the entire asset lifecycle." },
+    ],
     stats: [{ n: "18+", label: "Years of engineering" }, { n: "50+", label: "Equipment categories" }, { n: "20+", label: "Industrial sectors" }, { n: "100+", label: "Engineering projects" }, { n: "24/7", label: "Technical support" }],
     certLabel: "Certifications & standards", certTitle: "Certified quality. Verified at every step.",
     certs: [
@@ -80,7 +93,20 @@ const T = {
       { title: "Запчасти и приводы", desc: "Оригинальные запчасти и автоматизация арматуры." },
     ],
     lcLabel: "Жизненный цикл", lcTitle: "Инжиниринг на всём жизненном цикле актива.",
-    lcSteps: ["Концепция", "Инжиниринг", "Проектирование", "Производство", "Заводские испытания", "Логистика", "Монтаж", "Пусконаладка", "Эксплуатация", "Предиктивное обслуживание", "Модернизация", "Сопровождение"],
+    lcSteps: [
+      { name: "Концепция", desc: "Инновационные концепции под ваши бизнес-задачи." },
+      { name: "Инжиниринг", desc: "Передовой инжиниринг: безопасные и надёжные решения." },
+      { name: "Проектирование", desc: "Умное проектирование, оптимизированное под работу." },
+      { name: "Производство", desc: "Прецизионное производство по строгим стандартам." },
+      { name: "Заводские испытания", desc: "Тщательные испытания гарантируют надёжность." },
+      { name: "Логистика", desc: "Эффективная глобальная логистика — точно в срок." },
+      { name: "Монтаж", desc: "Профессиональный монтаж сертифицированными командами." },
+      { name: "Пусконаладка", desc: "Бесшовная пусконаладка — системы работают как задумано." },
+      { name: "Эксплуатация", desc: "Надёжная эксплуатация с мониторингом в реальном времени." },
+      { name: "Предиктивное обслуживание", desc: "Аналитика прогнозирует проблемы и снижает простои." },
+      { name: "Модернизация", desc: "Модернизация продлевает срок службы активов." },
+      { name: "Сопровождение", desc: "Непрерывная поддержка на всём жизненном цикле." },
+    ],
     stats: [{ n: "18+", label: "Лет инжиниринга" }, { n: "50+", label: "Категорий оборудования" }, { n: "20+", label: "Отраслей" }, { n: "100+", label: "Инженерных проектов" }, { n: "24/7", label: "Техническая поддержка" }],
     certLabel: "Сертификаты и стандарты", certTitle: "Сертифицированное качество. Проверено на каждом этапе.",
     certs: [
@@ -133,16 +159,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       {/* Hero */}
-      <section className="video-hero hero-onvideo" style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+      <section className="video-hero hero-onvideo hero-lightswap" style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
         <HeroVideo media="home" />
-        <div className="container">
+        <div className="container hero-center">
           <div className="eyebrow reveal" style={{ marginBottom: 28 }}>{t.kicker}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 1040, fontSize: "clamp(32px,4.6vw,54px)" }}>
+          <h1 className="h1 reveal hero-2line" style={{ maxWidth: 1200, margin: "0 auto", fontSize: "clamp(28px,3.6vw,44px)" }}>
             <span style={{ display: "block" }}>{t.heroL1} {t.heroL2}</span>
             <span style={{ display: "block" }}>{t.heroL3}</span>
           </h1>
-          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.72)", maxWidth: 1040 }}>{t.heroSub}</p>
-          <div className="reveal" style={{ display: "flex", gap: 16, marginTop: 48, flexWrap: "wrap" }}>
+          <p className="reveal" style={{ margin: "32px auto 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.72)", maxWidth: 1040 }}>{t.heroSub}</p>
+          <div className="reveal" style={{ display: "flex", gap: 16, marginTop: 48, flexWrap: "wrap", justifyContent: "center" }}>
             <Link href={localized(locale, "/services")} className="btn btn-primary">{t.ctaSolutions}</Link>
             <Link href={localized(locale, "/contact")} className="btn btn-ghost">{t.ctaContact}</Link>
           </div>
@@ -236,48 +262,45 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="container">
           {label(t.lcLabel)}
           <h2 className="h2 reveal oneline" style={{ margin: "0 0 64px" }}>{t.lcTitle}</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 16 }} className="grid-lc">
-            {t.lcSteps.map((name, i) => (
-              <div
-                key={i}
-                className="reveal card card-hover"
-                style={{
-                  position: "relative",
-                  padding: "22px 20px 24px",
-                  borderRadius: 16,
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 14,
-                  minHeight: 132,
-                  overflow: "hidden",
-                }}
-              >
-                <span
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 3,
-                    background: "linear-gradient(90deg, var(--green), rgba(47,217,166,0))",
-                  }}
-                />
-                <span
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: 99,
-                    background: "var(--green)",
-                    boxShadow: "0 0 0 5px rgba(47,217,166,.14)",
-                  }}
-                />
-                <span style={{ fontSize: 15.5, fontWeight: 600, color: "var(--text)", lineHeight: 1.32, marginTop: "auto" }}>{name}</span>
+          {(() => {
+            const P = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+            const LC_ICONS = [
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-4 10.5c.6.5 1 1.4 1 2.5h6c0-1.1.4-2 1-2.5A6 6 0 0 0 12 3z" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M12 4l6 16M12 4 6 20M8.6 14h6.8" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M3 21V10l6 4V10l6 4V6l6 4v11z" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><rect x="6" y="3.5" width="12" height="17" rx="2" /><path d="M9 3.5h6M9 13l2 2 4-4" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z" /><circle cx="7" cy="18" r="1.6" /><circle cx="17" cy="18" r="1.6" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M16 3.5l4.5 4.5-3 3-2-2-8.5 8.5-1.5-1.5 8.5-8.5-2-2z" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M12 3v9" /><path d="M6.5 7a8 8 0 1 0 11 0" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M4 7h16M4 12h16M4 17h16" /><circle cx="9" cy="7" r="2" /><circle cx="15" cy="12" r="2" /><circle cx="8" cy="17" r="2" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M4 20V11M9 20V7M14 20v-6M19 20V9M3 20h18" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" /></svg>,
+              <svg key="i" width="30" height="30" viewBox="0 0 24 24" {...P}><path d="M4 13a8 8 0 0 1 16 0" /><rect x="3" y="13" width="4" height="6" rx="1.4" /><rect x="17" y="13" width="4" height="6" rx="1.4" /><path d="M20 19a3 3 0 0 1-3 3h-3" /></svg>,
+            ];
+            return (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 20, rowGap: 40 }} className="grid-lc">
+                {t.lcSteps.map((s, i) => (
+                  <div key={i} className="reveal lc-step" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                    {/* timeline node + connector */}
+                    <div style={{ position: "relative", width: "100%", height: 22, marginBottom: 22 }}>
+                      <span aria-hidden style={{ position: "absolute", top: 10, left: 0, right: 0, height: 2, background: "rgba(47,217,166,.35)" }} />
+                      <span style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 22, height: 22, borderRadius: 99, border: "2px solid var(--green)", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ width: 8, height: 8, borderRadius: 99, background: i === 0 ? "var(--green)" : "transparent", boxShadow: i === 0 ? "0 0 0 3px rgba(47,217,166,.25)" : "none" }} />
+                      </span>
+                    </div>
+                    <div className="card card-hover" style={{ width: "100%", padding: "26px 18px 24px", borderRadius: 16, background: "var(--card)", border: "1px solid var(--border)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, minHeight: 210 }}>
+                      <span style={{ color: "var(--green)" }}>{LC_ICONS[i]}</span>
+                      <span className="mono" style={{ fontSize: 13, fontWeight: 600, color: "var(--green)", marginTop: 6 }}>{String(i + 1).padStart(2, "0")}</span>
+                      <span style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", lineHeight: 1.25 }}>{s.name}</span>
+                      <span aria-hidden style={{ width: 22, height: 2, background: "var(--green)", margin: "2px 0 4px" }} />
+                      <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "var(--text-dim)" }}>{s.desc}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            );
+          })()}
         </div>
       </section>
 

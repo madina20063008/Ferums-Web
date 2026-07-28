@@ -91,9 +91,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="about" />
-        <div className="container">
+        <div className="container hero-center">
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 1000 }}>{t.title}</h1>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
         </div>
       </section>
 

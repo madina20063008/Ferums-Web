@@ -5,6 +5,7 @@ import { isLocale, field, type Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 import { buildMetadata } from "@/lib/seo";
 import { getArticles } from "@/lib/site-data";
+import { HeroVideo } from "@/components/site/HeroVideo";
 
 // Faithful port of News.dc.html. Static hero copy is bilingual below; the
 // news list comes from the DB so the admin can manage it.
@@ -35,12 +36,16 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
   return (
     <>
       {/* Hero */}
-      <header className="section">
-        <div className="container">
-          <div className="eyebrow reveal">{t.label}</div>
-          <h1 className="h1 reveal">{t.title}</h1>
+      <section
+        className="video-hero hero-onvideo hero-lightswap"
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+      >
+        <HeroVideo media="news" />
+        <div className="container hero-center">
+          <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, margin: "0 auto", fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
         </div>
-      </header>
+      </section>
 
       {/* Articles */}
       <section className="section" style={{ paddingTop: 0 }}>

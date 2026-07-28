@@ -43,10 +43,10 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
         style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="industries" />
-        <div className="container">
+        <div className="container hero-center">
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 900 }}>{t.title}</h1>
-          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 16, lineHeight: 1.65, color: "rgba(255,255,255,.75)", maxWidth: 620 }}>{t.intro}</p>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
+          <p className="reveal" style={{ margin: "32px 0 0", fontSize: 15, lineHeight: 1.6, color: "rgba(255,255,255,.75)", maxWidth: 1080 }}>{t.intro}</p>
         </div>
       </section>
 

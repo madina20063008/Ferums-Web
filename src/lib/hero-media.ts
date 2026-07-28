@@ -7,10 +7,13 @@
 export interface HeroMedia {
   poster: string;
   sources: { src: string; type?: string }[];
+  /** Shown instead of the video in the light theme (see .hero-lightswap in globals.css). */
+  lightImage?: string;
 }
 
 export const HERO_MEDIA: Record<string, HeroMedia> = {
   home: {
+    lightImage: "/hero-refinery-wide.png",
     poster: "https://images.unsplash.com/photo-1566221857770-508d35ee6220?w=2400&q=80",
     sources: [
       { src: "https://www.shutterstock.com/shutterstock/videos/4054533701/preview/stock-footage-aerial-view-of-large-scale-chemical-plant-and-oil-refinery-infrastructure-in-industrial-zone.webm", type: "video/webm" },
@@ -42,9 +45,25 @@ export const HERO_MEDIA: Record<string, HeroMedia> = {
     ],
   },
   sustainability: {
-    // Original design: a static wind-turbines-at-sunset image (no video).
-    poster: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=2400&q=80",
+    // Day/night still images (no video): green globe in dark theme, eco city in light.
+    poster: "/hero-sustainability-dark.jpg",
     sources: [],
+    lightImage: "/hero-sustainability-light.jpg",
+  },
+  partners: {
+    poster: "/hero-partners-dark.jpg",
+    sources: [],
+    lightImage: "/hero-partners-light.jpg",
+  },
+  services: {
+    poster: "/hero-services-dark.png",
+    sources: [],
+    lightImage: "/hero-services-light.png",
+  },
+  news: {
+    poster: "/hero-news-dark.jpg",
+    sources: [],
+    lightImage: "/hero-news-light.jpg",
   },
   ferumsDigital: {
     poster: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=70",

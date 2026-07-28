@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { isLocale, pick, field, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
 import { getServices } from "@/lib/site-data";
+import { HeroVideo } from "@/components/site/HeroVideo";
 
 // Faithful port of Solutions.dc.html. Static hero copy is bilingual below; the
 // services list comes from the DB so the admin can manage it.
@@ -37,18 +38,22 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
   return (
     <>
       {/* Hero */}
-      <header className="section">
-        <div className="container">
-          <div className="eyebrow reveal">{t.label}</div>
-          <h1 className="h1 reveal">{t.title}</h1>
+      <section
+        className="video-hero hero-onvideo hero-lightswap"
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+      >
+        <HeroVideo media="services" />
+        <div className="container hero-center">
+          <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, margin: "0 auto", fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
           <p
             className="reveal"
-            style={{ marginTop: 22, fontSize: 16, lineHeight: 1.6, color: "var(--text)", opacity: 0.82, maxWidth: 640 }}
+            style={{ margin: "22px auto 0", fontSize: 15, lineHeight: 1.6, color: "rgba(255,255,255,.82)", maxWidth: 1040 }}
           >
             {t.intro}
           </p>
         </div>
-      </header>
+      </section>
 
       {/* Service list */}
       <section className="section" style={{ paddingTop: 0 }}>

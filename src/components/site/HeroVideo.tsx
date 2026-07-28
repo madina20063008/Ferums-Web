@@ -19,6 +19,10 @@ export function HeroVideo({ media }: { media: keyof typeof HERO_MEDIA }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img src={m.poster} alt="" />
       )}
+      {m.lightImage ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img className="hero-light-img" src={m.lightImage} alt="" />
+      ) : null}
       <div className="hero-video-scrim" />
     </div>
   );

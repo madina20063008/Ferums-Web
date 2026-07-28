@@ -25,7 +25,7 @@ export default async function PartnersPage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <PageHeader eyebrow={pick({ en: "Global network", ru: "Глобальная сеть" }, locale)} title={pick(TITLE, locale)} lead={pick(LEAD, locale)} />
+      <PageHeader eyebrow={pick({ en: "Global network", ru: "Глобальная сеть" }, locale)} title={pick(TITLE, locale)} lead={pick(LEAD, locale)} video="partners" />
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">

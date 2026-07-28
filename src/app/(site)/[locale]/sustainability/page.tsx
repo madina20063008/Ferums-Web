@@ -63,13 +63,13 @@ export default async function SustainabilityPage({ params }: { params: Promise<{
     <>
       {/* Hero */}
       <section
-        className="video-hero hero-onvideo"
+        className="video-hero hero-onvideo hero-lightswap"
         style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
       >
         <HeroVideo media="sustainability" />
-        <div className="container">
+        <div className="container hero-center">
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 900 }}>{t.title}</h1>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, margin: "0 auto", fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
         </div>
       </section>
 
