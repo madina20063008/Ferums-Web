@@ -56,7 +56,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       </section>
 
       {/* Service list */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section">
         <div className="container" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
           {services.map((s) => {
             const items = (s.items as unknown as { en: string; ru: string }[]) || [];

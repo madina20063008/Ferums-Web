@@ -78,7 +78,7 @@ export default async function SustainabilityPage({ params }: { params: Promise<{
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 32 }} className="grid-3">
             {t.pillars.map((p, i) => (
-              <div key={i} className="reveal card" style={{ borderRadius: 20, overflow: "hidden", background: "var(--card)", border: "1px solid var(--border)" }}>
+              <div key={i} className="reveal card card-hover" style={{ borderRadius: 20, overflow: "hidden", background: "var(--card)", border: "1px solid var(--border)" }}>
                 <span style={{ display: "block", aspectRatio: "16/9", overflow: "hidden" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.img} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />

@@ -196,7 +196,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="section section-alt">
         <div className="container">
           {label(t.indLabel)}
-          <h2 className="h2 reveal" style={{ margin: "0 0 72px", maxWidth: 700 }}>{t.indTitle}</h2>
+          <h2 className="h2 reveal oneline" style={{ margin: "0 0 72px" }}>{t.indTitle}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }} className="grid-2">
             {homeIndustries.map((it) => (
               <Link key={it.id} href={localized(locale, "/industries")} className="reveal" style={{ position: "relative", display: "block", borderRadius: 20, overflow: "hidden", aspectRatio: "16/9", background: "var(--card)" }}>
@@ -224,7 +224,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div style={{ display: "flex", flexDirection: "column", gap: 2, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border)" }}>
             {services.map((s) => (
               <Link key={s.id} href={localized(locale, "/services")} className="reveal svc-row" style={{ display: "grid", gridTemplateColumns: "1.1fr 2fr 60px", gap: 32, alignItems: "center", padding: "36px 48px", background: "var(--surface-alt)" }}>
-                <span style={{ fontSize: 24, fontWeight: 600, color: "var(--text)", letterSpacing: "-.01em" }}>{field(s, "title", locale)}</span>
+                <span style={{ fontSize: 20, fontWeight: 600, color: "var(--text)", letterSpacing: "-.01em" }}>{field(s, "title", locale)}</span>
                 <span style={{ fontSize: 15, lineHeight: 1.6, color: "var(--text-dim)" }}>{field(s, "desc", locale)}</span>
                 <span style={{ fontSize: 22, color: "var(--green)", textAlign: "right" }}>→</span>
               </Link>
@@ -289,9 +289,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                         <span style={{ width: 8, height: 8, borderRadius: 99, background: i === 0 ? "var(--green)" : "transparent", boxShadow: i === 0 ? "0 0 0 3px rgba(47,217,166,.25)" : "none" }} />
                       </span>
                     </div>
-                    <div className="card card-hover" style={{ width: "100%", padding: "26px 18px 24px", borderRadius: 16, background: "var(--card)", border: "1px solid var(--border)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, minHeight: 210 }}>
-                      <span style={{ color: "var(--green)" }}>{LC_ICONS[i]}</span>
-                      <span className="mono" style={{ fontSize: 13, fontWeight: 600, color: "var(--green)", marginTop: 6 }}>{String(i + 1).padStart(2, "0")}</span>
+                    <div className="card card-hover" style={{ width: "100%", flex: 1, padding: "26px 18px 24px", borderRadius: 16, background: "var(--card)", border: "1px solid var(--border)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, minHeight: 210 }}>
+                      <span style={{ color: "var(--green)", marginBottom: 4 }}>{LC_ICONS[i]}</span>
                       <span style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", lineHeight: 1.25 }}>{s.name}</span>
                       <span aria-hidden style={{ width: 22, height: 2, background: "var(--green)", margin: "2px 0 4px" }} />
                       <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "var(--text-dim)" }}>{s.desc}</span>
@@ -356,7 +355,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="section section-alt">
         <div className="container">
           {label(t.projLabel)}
-          <h2 className="h2 reveal" style={{ margin: "0 0 72px" }}>{t.projTitle}</h2>
+          <h2 className="h2 reveal oneline" style={{ margin: "0 0 72px" }}>{t.projTitle}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }} className="grid-2">
             {projects.slice(0, 4).map((pr) => (
               <Link key={pr.id} href={localized(locale, `/projects/${pr.slug}`)} className="reveal" style={{ display: "block", borderRadius: 20, overflow: "hidden", background: "var(--card)", border: "1px solid var(--border)" }}>

@@ -79,6 +79,11 @@ body {
   padding: 36px 24px 28px;
   z-index: 100; overflow-y: auto;
 }
+/* Light theme: give the sidebar a soft tinted panel instead of stark white. */
+[data-theme="light"] .site-sidebar { background: #E9ECF1; border-right-color: rgba(16,20,28,0.08); }
+/* Footer matches the sidebar panel in light theme; keeps var(--bg-2) in dark. */
+.site-footer { background: var(--bg-2); }
+[data-theme="light"] .site-footer { background: #E9ECF1; }
 .site-topbar { display: none; }
 .site-scrim { display: none; }
 
@@ -141,9 +146,12 @@ body {
 .h1 { font-size: clamp(34px, 6.4vw, 62px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; margin: 0; }
 .h2 { font-size: clamp(28px, 4.4vw, 44px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
 .lead { font-size: clamp(14px, 1.2vw, 16px); line-height: 1.65; color: var(--text-dim); }
-/* Section headings that must stay on a single line (wrap only on small mobile). */
+/* Section headings: centered and sized to fit. Long Russian wraps to a second
+   centered line instead of overflowing (previously forced nowrap → overflow). */
+.oneline { text-align: center; margin-left: auto; margin-right: auto; }
+.eyebrow:has(+ .oneline) { text-align: center; }
 @media (min-width: 768px) {
-  .oneline { white-space: nowrap; font-size: clamp(22px, 3vw, 40px) !important; }
+  .oneline { font-size: clamp(22px, 2.5vw, 34px) !important; }
 }
 /* Hero title whose two phrase-lines must each stay on one row (2 rows total) on
    desktop; on mobile they wrap naturally. */

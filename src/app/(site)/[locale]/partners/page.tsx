@@ -27,7 +27,7 @@ export default async function PartnersPage({ params }: { params: Promise<{ local
     <>
       <PageHeader eyebrow={pick({ en: "Global network", ru: "Глобальная сеть" }, locale)} title={pick(TITLE, locale)} lead={pick(LEAD, locale)} video="partners" />
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section">
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18 }}>
             {partners.map((p) => {
@@ -53,7 +53,7 @@ export default async function PartnersPage({ params }: { params: Promise<{ local
                   {card}
                 </a>
               ) : (
-                <div key={p.id} className="card reveal" style={{ overflow: "hidden" }}>
+                <div key={p.id} className="card card-hover reveal" style={{ overflow: "hidden" }}>
                   {card}
                 </div>
               );

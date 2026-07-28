@@ -48,7 +48,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Articles */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section">
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 40 }}>
             {articles.map((a) => (

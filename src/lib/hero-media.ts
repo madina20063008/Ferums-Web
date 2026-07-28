@@ -65,6 +65,11 @@ export const HERO_MEDIA: Record<string, HeroMedia> = {
     sources: [],
     lightImage: "/hero-news-light.jpg",
   },
+  projects: {
+    poster: "/hero-projects-dark.jpg",
+    sources: [],
+    lightImage: "/hero-projects-light.jpg",
+  },
   ferumsDigital: {
     poster: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=70",
     sources: [

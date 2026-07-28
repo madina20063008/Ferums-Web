@@ -5,6 +5,7 @@ import { isLocale, field, localizeStat, type Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 import { buildMetadata } from "@/lib/seo";
 import { getProjects } from "@/lib/site-data";
+import { HeroVideo } from "@/components/site/HeroVideo";
 
 // Faithful port of Projects.dc.html. Static hero copy is bilingual below; the
 // case-study list comes from the DB so the admin can manage it.
@@ -39,18 +40,22 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
   return (
     <>
       {/* Hero */}
-      <header className="section">
+      <section
+        className="video-hero hero-onvideo hero-lightswap"
+        style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}
+      >
+        <HeroVideo media="projects" />
         <div className="container hero-center">
-          <div className="eyebrow reveal">{t.label}</div>
-          <h1 className="h1 reveal" style={{ maxWidth: 1040, fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
+          <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
+          <h1 className="h1 reveal" style={{ maxWidth: 1040, margin: "0 auto", fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
           <p
             className="reveal"
-            style={{ marginTop: 22, fontSize: 15, lineHeight: 1.6, color: "var(--text-dim)", maxWidth: 1040 }}
+            style={{ margin: "22px auto 0", fontSize: 15, lineHeight: 1.6, color: "rgba(255,255,255,.82)", maxWidth: 1040 }}
           >
             {t.intro}
           </p>
         </div>
-      </header>
+      </section>
 
       {/* Case studies */}
       <section className="section section-alt">

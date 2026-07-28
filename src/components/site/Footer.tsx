@@ -20,7 +20,7 @@ export function Footer({ locale, site }: { locale: Locale; site: SiteContent }) 
   );
 
   return (
-    <footer style={{ borderTop: "1px solid var(--border)", background: "var(--bg-2)" }}>
+    <footer className="site-footer" style={{ borderTop: "1px solid var(--border)" }}>
       <div className="container" style={{ padding: "64px 40px 40px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr 1fr", gap: 40 }} className="footer-grid">
           <div>

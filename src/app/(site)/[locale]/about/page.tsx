@@ -117,7 +117,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <h2 className="h2 reveal" style={{ margin: "0 0 64px" }}>{t.valuesTitle}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 32 }} className="grid-3">
             {t.values.map((v) => (
-              <div key={v.num} className="reveal card" style={{ padding: 40, borderRadius: 20, background: "var(--card)", border: "1px solid var(--border)" }}>
+              <div key={v.num} className="reveal card card-hover" style={{ padding: 40, borderRadius: 20, background: "var(--card)", border: "1px solid var(--border)" }}>
                 <span className="mono" style={{ fontSize: 13, color: "var(--green)" }}>{v.num}</span>
                 <h3 style={{ margin: "16px 0 0", fontSize: 24, fontWeight: 600, color: "var(--text)" }}>{v.title}</h3>
                 <p style={{ margin: "12px 0 0", fontSize: 15, lineHeight: 1.7, color: "var(--text-dim)" }}>{v.desc}</p>
@@ -136,7 +136,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 28 }} className="grid-4">
             {t.team.map((m) => (
               <div key={m.name} className="reveal" style={{ display: "flex", flexDirection: "column" }}>
-                <span style={{ display: "block", borderRadius: 20, overflow: "hidden", aspectRatio: "3/4", background: "var(--card)", border: "1px solid var(--border)" }}>
+                <span className="card card-hover" style={{ display: "block", borderRadius: 20, overflow: "hidden", aspectRatio: "3/4", background: "var(--card)", border: "1px solid var(--border)" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={m.src} alt={m.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </span>
