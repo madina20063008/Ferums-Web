@@ -8,8 +8,8 @@ import { useEffect } from "react";
 export function ThemeScript() {
   useEffect(() => {
     try {
-      let t = localStorage.getItem("ferums-theme");
-      if (!t) t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      // Default to dark on first visit; respect the user's saved choice after that.
+      const t = localStorage.getItem("ferums-theme") || "dark";
       document.documentElement.setAttribute("data-theme", t);
     } catch {}
   }, []);

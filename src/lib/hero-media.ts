@@ -14,7 +14,9 @@ export interface HeroMedia {
 export const HERO_MEDIA: Record<string, HeroMedia> = {
   home: {
     lightImage: "/hero-refinery-wide.png",
-    poster: "https://images.unsplash.com/photo-1566221857770-508d35ee6220?w=2400&q=80",
+    // No poster: the video autoplays over the dark hero background, so no still
+    // image flashes before it when navigating in from another page.
+    poster: "",
     sources: [
       { src: "https://www.shutterstock.com/shutterstock/videos/4054533701/preview/stock-footage-aerial-view-of-large-scale-chemical-plant-and-oil-refinery-infrastructure-in-industrial-zone.webm", type: "video/webm" },
       { src: "https://static.videezy.com/system/resources/previews/000/049/766/original/refinery07.mp4", type: "video/mp4" },

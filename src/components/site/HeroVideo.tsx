@@ -10,7 +10,7 @@ export function HeroVideo({ media }: { media: keyof typeof HERO_MEDIA }) {
   return (
     <div className="hero-video" aria-hidden="true">
       {m.sources.length > 0 ? (
-        <video autoPlay muted loop playsInline preload="metadata" poster={m.poster}>
+        <video autoPlay muted loop playsInline preload="auto" poster={m.poster || undefined}>
           {m.sources.map((s, i) => (
             <source key={i} src={s.src} type={s.type} />
           ))}
