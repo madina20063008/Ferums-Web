@@ -14,9 +14,9 @@ export interface HeroMedia {
 export const HERO_MEDIA: Record<string, HeroMedia> = {
   home: {
     lightImage: "/hero-refinery-wide.png",
-    // No poster: the video autoplays over the dark hero background, so no still
-    // image flashes before it when navigating in from another page.
-    poster: "",
+    // Poster is the video's own first frame, so the still is indistinguishable
+    // from the video starting — no flash, no black gap.
+    poster: "/hero-home-poster.jpg",
     sources: [
       { src: "https://www.shutterstock.com/shutterstock/videos/4054533701/preview/stock-footage-aerial-view-of-large-scale-chemical-plant-and-oil-refinery-infrastructure-in-industrial-zone.webm", type: "video/webm" },
       { src: "https://static.videezy.com/system/resources/previews/000/049/766/original/refinery07.mp4", type: "video/mp4" },
@@ -35,13 +35,15 @@ export const HERO_MEDIA: Record<string, HeroMedia> = {
     ],
   },
   careers: {
-    poster: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=70",
+    // Poster = the video's own first frame (seamless start, no flash/black).
+    poster: "/hero-careers-poster.jpg",
     sources: [
       { src: "https://www.pexels.com/download/video/30283099/", type: "video/mp4" },
     ],
   },
   about: {
-    poster: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=70",
+    // Poster = the video's own first frame (seamless start, no flash/black).
+    poster: "/hero-about-poster.jpg",
     sources: [
       { src: "https://www.pexels.com/download/video/8102892/", type: "video/mp4" },
     ],
@@ -73,7 +75,8 @@ export const HERO_MEDIA: Record<string, HeroMedia> = {
     lightImage: "/hero-projects-light.jpg",
   },
   ferumsDigital: {
-    poster: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=70",
+    // Poster = the video's own first frame (seamless start, no flash/black).
+    poster: "/hero-ferumsdigital-poster.jpg",
     sources: [
       { src: "https://www.shutterstock.com/shutterstock/videos/4070799231/preview/stock-footage-glowing-digital-globe-and-security-padlocks-overlaid-on-a-massive-industrial-petrochemical-plant-at.webm", type: "video/webm" },
     ],
