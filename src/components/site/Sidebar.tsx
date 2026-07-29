@@ -125,7 +125,13 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
           <Link href={localized(locale, "/")} className="side-logo-full" aria-label={nav.siteName}>
             {renderLogo(160, 80, 64, true)}
           </Link>
-          <button className="side-collapse" onClick={() => setCollapsed(true)} aria-label="Collapse menu" title="Collapse">‹</button>
+          <button className="side-collapse" onClick={() => setCollapsed(true)} aria-label="Collapse menu" title="Collapse">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 17l-5-5 5-5M11 17l-5-5 5-5" /></svg>
+          </button>
+          {/* Collapsed: expand chevron under the F mark */}
+          <button className="side-expand" onClick={() => setCollapsed(false)} aria-label="Expand menu" title="Expand">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 17l5-5-5-5M13 17l5-5-5-5" /></svg>
+          </button>
         </div>
 
         <NavLinks />

@@ -103,13 +103,17 @@ body {
   transition: border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
 }
 .side-logo-mark:hover { border-color: rgba(47, 217, 166, 0.5); color: var(--accent); transform: translateY(-1px); }
-.side-collapse {
-  display: none; margin-left: auto; flex: none; width: 28px; height: 28px;
-  border-radius: 8px; cursor: pointer; align-items: center; justify-content: center;
-  background: transparent; border: 1px solid var(--border-strong); color: var(--text-dim);
-  font-size: 17px; line-height: 1;
+.side-collapse, .side-expand {
+  display: none; flex: none; cursor: pointer; align-items: center; justify-content: center;
+  background: none; border: none; padding: 4px; color: var(--green);
+  transition: color .22s ease;
 }
-.side-collapse:hover { color: var(--text); border-color: var(--accent); }
+.side-collapse { margin-left: auto; animation: arrowNudgeL 1.7s ease-in-out infinite; }
+.side-expand { animation: arrowNudgeR 1.7s ease-in-out infinite; }
+.side-collapse:hover, .side-expand:hover { color: var(--accent); }
+@keyframes arrowNudgeR { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(9px); } }
+@keyframes arrowNudgeL { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-9px); } }
+@media (prefers-reduced-motion: reduce) { .side-collapse, .side-expand { animation: none; } }
 
 .side-group { display: flex; flex-direction: column; gap: 4px; }
 .side-link {
@@ -133,6 +137,8 @@ body {
 
   /* collapsed look */
   .site-sidebar { overflow: visible; }
+  .side-logo-row { flex-direction: column; gap: 12px; }
+  .side-expand { display: inline-flex; order: -1; }
   .side-logo-mark { display: flex; }
   .side-logo-full, .side-collapse, .side-section, .side-contact .side-label { display: none; }
   .side-link { justify-content: center; padding: 11px 0; gap: 0; position: relative; overflow: visible; }
@@ -152,6 +158,8 @@ body {
 
   /* expanded look */
   html[data-sidebar="expanded"] .site-sidebar { overflow-y: auto; }
+  html[data-sidebar="expanded"] .side-logo-row { flex-direction: row; gap: 10px; }
+  html[data-sidebar="expanded"] .side-expand { display: none; }
   html[data-sidebar="expanded"] .side-logo-mark { display: none; }
   html[data-sidebar="expanded"] .side-logo-full { display: flex; }
   html[data-sidebar="expanded"] .side-collapse { display: inline-flex; }
