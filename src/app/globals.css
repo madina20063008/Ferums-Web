@@ -108,12 +108,8 @@ body {
   background: none; border: none; padding: 4px; color: var(--green);
   transition: color .22s ease;
 }
-.side-collapse { margin-left: auto; animation: arrowNudgeL 1.7s ease-in-out infinite; }
-.side-expand { animation: arrowNudgeR 1.7s ease-in-out infinite; }
+.side-collapse { margin-left: auto; }
 .side-collapse:hover, .side-expand:hover { color: var(--accent); }
-@keyframes arrowNudgeR { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(9px); } }
-@keyframes arrowNudgeL { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-9px); } }
-@media (prefers-reduced-motion: reduce) { .side-collapse, .side-expand { animation: none; } }
 
 .side-group { display: flex; flex-direction: column; gap: 4px; }
 .side-link {
