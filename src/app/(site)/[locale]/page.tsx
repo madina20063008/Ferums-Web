@@ -167,7 +167,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <span style={{ display: "block" }}>{t.heroL1} {t.heroL2}</span>
             <span style={{ display: "block" }}>{t.heroL3}</span>
           </h1>
-          <p className="reveal" style={{ margin: "32px auto 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.72)", maxWidth: 1040 }}>{t.heroSub}</p>
+          <p className="reveal" style={{ margin: "32px auto 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.92)", maxWidth: 1040 }}>{t.heroSub}</p>
           <div className="reveal" style={{ display: "flex", gap: 16, marginTop: 48, flexWrap: "wrap", justifyContent: "center" }}>
             <Link href={localized(locale, "/services")} className="btn btn-primary">{t.ctaSolutions}</Link>
             <Link href={localized(locale, "/contact")} className="btn btn-ghost">{t.ctaContact}</Link>

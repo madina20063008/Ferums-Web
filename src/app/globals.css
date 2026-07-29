@@ -87,6 +87,82 @@ body {
 .site-topbar { display: none; }
 .site-scrim { display: none; }
 
+/* ── Sidebar internals (icon rail + expanded) ─────────────────────────────── */
+.site-main { transition: margin-left 1s cubic-bezier(.16,1,.3,1); }
+.site-sidebar { transition: width 1s cubic-bezier(.16,1,.3,1); }
+@keyframes sideFadeIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+/* softer variant for rows whose icons are already visible (avoids a hard flash) */
+@keyframes sideSlideIn { from { opacity: .35; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+
+.side-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+.side-logo-full { display: flex; flex: 1; min-width: 0; }
+.side-logo-mark {
+  display: none; width: 46px; height: 46px; flex: none; border-radius: 13px; cursor: pointer;
+  align-items: center; justify-content: center;
+  background: var(--card); border: 1px solid var(--border); color: var(--green);
+  transition: border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+.side-logo-mark:hover { border-color: rgba(47, 217, 166, 0.5); color: var(--accent); transform: translateY(-1px); }
+.side-collapse {
+  display: none; margin-left: auto; flex: none; width: 28px; height: 28px;
+  border-radius: 8px; cursor: pointer; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid var(--border-strong); color: var(--text-dim);
+  font-size: 17px; line-height: 1;
+}
+.side-collapse:hover { color: var(--text); border-color: var(--accent); }
+
+.side-group { display: flex; flex-direction: column; gap: 4px; }
+.side-link {
+  display: flex; align-items: center; gap: 13px; padding: 11px 14px; border-radius: 10px;
+  font-size: 15px; font-weight: 500; color: var(--text-dim); white-space: nowrap; overflow: hidden;
+  transition: background .2s ease, color .2s ease;
+}
+.site-scope .side-link:hover { color: var(--text); background: var(--surface); }
+.side-link.active { color: var(--accent); background: rgba(28,175,232,.12); }
+.side-ico { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; }
+.side-langs { display: inline-flex; }
+.side-contact { width: 100%; }
+.side-contact .side-ico { color: #fff; width: auto; }
+
+/* Desktop: collapsed icon rail by default; [data-sidebar="expanded"] widens it. */
+@media (min-width: 1025px) {
+  .site-sidebar { width: 84px; padding: 30px 18px 24px; }
+  .site-main { margin-left: 84px; }
+  html[data-sidebar="expanded"] .site-sidebar { width: 280px; padding: 36px 24px 28px; }
+  html[data-sidebar="expanded"] .site-main { margin-left: 280px; }
+
+  /* collapsed look */
+  .site-sidebar { overflow: visible; }
+  .side-logo-mark { display: flex; }
+  .side-logo-full, .side-collapse, .side-section, .side-contact .side-label { display: none; }
+  .side-link { justify-content: center; padding: 11px 0; gap: 0; position: relative; overflow: visible; }
+  .side-contact { justify-content: center; padding: 13px 0; }
+  /* language switch stacks vertically (RU under EN) to fit the narrow rail */
+  .side-langs { flex-direction: column; align-self: center; gap: 4px; }
+  /* the label becomes a hover tooltip to the right of the icon — ONLY while
+     collapsed (not expanded), otherwise it would hide the real inline labels */
+  html:not([data-sidebar="expanded"]) .side-link .side-label {
+    display: block; position: absolute; left: calc(100% + 12px); top: 50%; transform: translateY(-50%) translateX(-4px);
+    padding: 7px 12px; border-radius: 9px; background: var(--card); color: var(--text);
+    border: 1px solid var(--border); box-shadow: var(--shadow);
+    font-size: 13px; font-weight: 500; white-space: nowrap; pointer-events: none;
+    opacity: 0; transition: opacity .16s ease, transform .16s ease; z-index: 300;
+  }
+  html:not([data-sidebar="expanded"]) .side-link:hover .side-label { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+  /* expanded look */
+  html[data-sidebar="expanded"] .site-sidebar { overflow-y: auto; }
+  html[data-sidebar="expanded"] .side-logo-mark { display: none; }
+  html[data-sidebar="expanded"] .side-logo-full { display: flex; }
+  html[data-sidebar="expanded"] .side-collapse { display: inline-flex; }
+  html[data-sidebar="expanded"] .side-section { display: block; }
+  html[data-sidebar="expanded"] .side-langs { display: inline-flex; flex-direction: row; align-self: flex-start; }
+  html[data-sidebar="expanded"] .side-link .side-label,
+  html[data-sidebar="expanded"] .side-contact .side-label { display: inline; }
+  html[data-sidebar="expanded"] .side-link { justify-content: flex-start; padding: 11px 14px; gap: 13px; }
+  html[data-sidebar="expanded"] .side-contact { justify-content: center; padding: 14px 24px; }
+}
+
 @media (max-width: 1024px) {
   .site-main { margin-left: 0; padding-top: 64px; }
   .site-topbar {
