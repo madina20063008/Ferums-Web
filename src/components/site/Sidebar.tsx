@@ -91,10 +91,14 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
           <Link href={localized("en", rest)} scroll={false} className="mono" style={toggleBtn(locale === "en")}>EN</Link>
           <Link href={localized("ru", rest)} scroll={false} className="mono" style={toggleBtn(locale === "ru")}>RU</Link>
         </div>
-        <div style={{ display: "flex", gap: 2, padding: 3, border: "1px solid var(--border-strong)", borderRadius: 10 }}>
-          <button onClick={() => setT("dark")} title="Dark" style={{ ...toggleBtn(theme === "dark"), fontSize: 13 }}>☾</button>
-          <button onClick={() => setT("light")} title="Light" style={{ ...toggleBtn(theme === "light"), fontSize: 13 }}>☀</button>
-        </div>
+        {/* Light/dark toggle hidden for now — the site runs dark-only until the
+            light theme is finalized. Re-enable this block to bring it back. */}
+        {false && (
+          <div style={{ display: "flex", gap: 2, padding: 3, border: "1px solid var(--border-strong)", borderRadius: 10 }}>
+            <button onClick={() => setT("dark")} title="Dark" style={{ ...toggleBtn(theme === "dark"), fontSize: 13 }}>☾</button>
+            <button onClick={() => setT("light")} title="Light" style={{ ...toggleBtn(theme === "light"), fontSize: 13 }}>☀</button>
+          </div>
+        )}
       </div>
       <Link href={localized(locale, "/contact")} onClick={() => setOpen(false)} className="btn btn-primary" style={{ width: "100%" }}>
         {nav.contactCta}

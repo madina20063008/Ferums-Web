@@ -8,9 +8,9 @@ import { useEffect } from "react";
 export function ThemeScript() {
   useEffect(() => {
     try {
-      // Default to dark on first visit; respect the user's saved choice after that.
-      const t = localStorage.getItem("ferums-theme") || "dark";
-      document.documentElement.setAttribute("data-theme", t);
+      // Light theme temporarily disabled — force dark for everyone until it's
+      // finalized. (Restore `localStorage.getItem("ferums-theme") || "dark"` later.)
+      document.documentElement.setAttribute("data-theme", "dark");
     } catch {}
   }, []);
   return null;

@@ -14,11 +14,11 @@
   --accent-ink: #ffffff;
   --green: #2FD9A6;   /* design's mono eyebrow / arrow accent */
 
-  /* dark (default) — matches the design (#090909 base, #101114 alt, #15181C cards) */
-  --bg: #090909;
-  --bg-2: #101114;
-  --surface-alt: #101114;
-  --card: #15181C;
+  /* dark (default) — deep navy blue base (was near-black) */
+  --bg: #081426;
+  --bg-2: #0B1B30;
+  --surface-alt: #0B1B30;
+  --card: #10233D;
   --surface: rgba(255, 255, 255, 0.035);
   --surface-2: rgba(255, 255, 255, 0.06);
   --border: rgba(255, 255, 255, 0.08);

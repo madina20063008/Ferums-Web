@@ -243,17 +243,38 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <Link href={localized(locale, "/products")} className="reveal" style={{ flexShrink: 0, fontSize: 16, fontWeight: 600, color: "var(--green)" }}>{t.prodLink} →</Link>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }} className="grid-4">
-            {t.products.map((p, i) => (
-              <Link key={i} href={localized(locale, "/products")} className="reveal card card-hover" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "36px 24px", borderRadius: 20, background: "var(--card)" }}>
-                <span style={{ display: "block", width: 40, height: 40, border: "1.5px solid var(--green)", borderRadius: 10, marginBottom: 22, position: "relative" }}>
-                  <span style={{ position: "absolute", inset: 10, border: "1.5px solid rgba(127,127,127,.4)", borderRadius: 4 }} />
-                </span>
-                <span style={{ display: "block", fontSize: 18, fontWeight: 600, color: "var(--text)" }}>{p.title}</span>
-                <span style={{ display: "block", marginTop: 8, fontSize: 14, lineHeight: 1.55, color: "var(--text-dim)" }}>{p.desc}</span>
-              </Link>
-            ))}
-          </div>
+          {(() => {
+            const IP = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+            const PROD_ICONS = [
+              /* Mechanical Seals — concentric sealing rings */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="3.5" /></svg>,
+              /* Dry Gas Seals — inner ring with a dashed gas gap */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="9" strokeDasharray="2 2.6" /></svg>,
+              /* Industrial Pumps — volute with inlet and outlet */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><circle cx="10" cy="13" r="6" /><path d="M10 7V3.5h5" /><path d="M16 13h5v-3" /></svg>,
+              /* Steam Turbines — rotor with curved blades */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><circle cx="12" cy="12" r="2" /><path d="M12 10c0-4 1.6-6 4-6M14 12c4 0 6 1.6 6 4M12 14c0 4-1.6 6-4 6M10 12c-4 0-6-1.6-6-4" /></svg>,
+              /* Process Compressors — pressure gauge */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><circle cx="12" cy="12" r="8.5" /><path d="M12 12l4-2.5M12 5.5v1.5" /></svg>,
+              /* Industrial Valves — bowtie body with handwheel */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><path d="M4 7 12 12 4 17Z" /><path d="M20 7 12 12 20 17Z" /><path d="M12 12V5.5M9.5 5h5" /></svg>,
+              /* Industrial Bearings — race with rolling balls */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="3.5" /><circle cx="12" cy="5.5" r="1" /><circle cx="12" cy="18.5" r="1" /><circle cx="5.5" cy="12" r="1" /><circle cx="18.5" cy="12" r="1" /></svg>,
+              /* Spare Parts & Actuators — gear */
+              <svg key="i" width="26" height="26" viewBox="0 0 24 24" {...IP}><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" /></svg>,
+            ];
+            return (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }} className="grid-4">
+                {t.products.map((p, i) => (
+                  <Link key={i} href={localized(locale, "/products")} className="reveal card card-hover" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "36px 24px", borderRadius: 20, background: "var(--card)" }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 52, height: 52, borderRadius: 14, border: "1.5px solid var(--green)", color: "var(--green)", marginBottom: 22 }}>{PROD_ICONS[i]}</span>
+                    <span style={{ display: "block", fontSize: 18, fontWeight: 600, color: "var(--text)" }}>{p.title}</span>
+                    <span style={{ display: "block", marginTop: 8, fontSize: 14, lineHeight: 1.55, color: "var(--text-dim)" }}>{p.desc}</span>
+                  </Link>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
