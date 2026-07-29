@@ -13,9 +13,9 @@ const T = {
     intro:
       "Tell us what you're building. An engineer — not a call center — will respond within one business day.",
     offices: [
-      { city: "Astana", detail: "Headquarters · Placeholder address, Kazakhstan · +7 (000) 000-00-00" },
-      { city: "Dubai", detail: "Middle East hub · Placeholder address, UAE" },
-      { city: "Frankfurt", detail: "European hub · Placeholder address, Germany" },
+      { city: "Guangzhou", name: "FERUMS Group Company — Manufacture Plant", address: "No. 12, Yunkai Road, Huangpu District, Guangzhou, China", email: "Email: office@ferums.com", phone: "Phone: 86-1890366789371" },
+      { city: "Tashkent", name: "FERUMS Sales Office", address: "Amir Temur street, Bld 107A, Tashkent city, Uzbekistan", email: "Email: office@ferums.com", phone: "Phone: +99890 312 0100" },
+      { city: "Kuala Lumpur", name: "FERUMS Sales Office", address: "Business Center Berjaya Central, Kuala Lumpur, Malaysia", email: "Email: office@ferums.com", phone: "Phone: +60 1139029480" },
     ],
   },
   ru: {
@@ -24,9 +24,9 @@ const T = {
     intro:
       "Расскажите, что вы строите. Ответит инженер — не колл-центр — в течение одного рабочего дня.",
     offices: [
-      { city: "Астана", detail: "Штаб-квартира · Адрес-заполнитель, Казахстан · +7 (000) 000-00-00" },
-      { city: "Дубай", detail: "Ближневосточный хаб · Адрес-заполнитель, ОАЭ" },
-      { city: "Франкфурт", detail: "Европейский хаб · Адрес-заполнитель, Германия" },
+      { city: "Гуанчжоу", name: "Группа компаний FERUMS — Производственный комплекс", address: "№ 12, ул. Юнькай, район Хуанпу, г. Гуанчжоу, Китай", email: "Электронная почта: office@ferums.com", phone: "Телефон: +86 189 0366 789371" },
+      { city: "Ташкент", name: "Офис продаж FERUMS", address: "Республика Узбекистан, г. Ташкент, ул. Амира Темура, 107А", email: "Электронная почта: office@ferums.com", phone: "Телефон: +998 90 312 0100" },
+      { city: "Куала-Лумпур", name: "Офис продаж FERUMS", address: "Бизнес-центр Berjaya Central, г. Куала-Лумпур, Малайзия", email: "Электронная почта: office@ferums.com", phone: "Телефон: +60 11 3902 9480" },
     ],
   },
 } as const;
@@ -52,7 +52,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         {/* Left: intro + offices */}
         <div>
           <div className="eyebrow reveal" style={{ marginBottom: 24 }}>{t.label}</div>
-          <h1 className="h1 reveal">{t.title}</h1>
+          <h1 className="h1 reveal" style={{ fontSize: "clamp(30px,4vw,48px)" }}>{t.title}</h1>
           <p className="reveal" style={{ margin: "28px 0 0", fontSize: 15, lineHeight: 1.7, color: "var(--text-dim)", maxWidth: 460 }}>{t.intro}</p>
           <div className="reveal" style={{ marginTop: 56, display: "flex", flexDirection: "column", gap: 28 }}>
             {t.offices.map((o, i) => (
@@ -62,7 +62,12 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 24, borderTop: "1px solid var(--border)", paddingTop: 24 }}
               >
                 <span className="mono" style={{ fontSize: 13, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--green)" }}>{o.city}</span>
-                <span style={{ fontSize: 15, lineHeight: 1.7, color: "var(--text-dim)" }}>{o.detail}</span>
+                <span style={{ display: "flex", flexDirection: "column", gap: 5, fontSize: 15, lineHeight: 1.55, color: "var(--text-dim)" }}>
+                  <span style={{ color: "var(--text)", fontWeight: 600 }}>{o.name}</span>
+                  <span>{o.address}</span>
+                  <span>{o.email}</span>
+                  <span>{o.phone}</span>
+                </span>
               </div>
             ))}
           </div>
