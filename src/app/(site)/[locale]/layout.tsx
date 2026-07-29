@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: `%s — ${site.seo.siteName}`,
     },
     description: pick(site.seo.defaultDescription, loc),
-    icons: { icon: "/favicon.ico" },
+    icons: { icon: "/uploads/f-mark.png" },
   };
 }
 
