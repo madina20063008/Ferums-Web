@@ -11,7 +11,7 @@ import { HeroVideo } from "@/components/site/HeroVideo";
 // design's T dictionary.
 const T = {
   en: {
-    kicker: "Industrial AI Revolution",
+    kicker: "AI in Industry",
     title: "Where mechanical engineering meets artificial intelligence.",
     intro:
       "FERUMS DIGITAL is our in-house technology arm — building proprietary software platforms, enterprise applications and industrial AI so customers get machines and intelligence from one engineering ecosystem.",
@@ -67,7 +67,7 @@ const T = {
     ctaBtn: "Talk to FERUMS DIGITAL",
   },
   ru: {
-    kicker: "Промышленная AI-революция",
+    kicker: "AI в промышленности",
     title: "Интеграция машиностроения и технологий искусственного интеллекта",
     intro:
       "FERUMS DIGITAL — внутреннее технологическое подразделение FERUMS: собственные программные платформы, корпоративные приложения и промышленный ИИ, объединяющие оборудование и интеллектуальные системы в единой инженерной экосистеме.",

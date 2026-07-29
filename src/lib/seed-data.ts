@@ -844,7 +844,7 @@ export const SITE: SiteContent = {
       { en: "Services", ru: "Услуги", href: "/services" },
       { en: "Products", ru: "Продукция", href: "/products" },
       { en: "Projects", ru: "Проекты", href: "/projects" },
-      { en: "Industrial AI Revolution", ru: "Промышленная AI-революция", href: "/ferums-digital" },
+      { en: "AI in Industry", ru: "AI в промышленности", href: "/ferums-digital" },
     ],
     company: [
       { en: "About FERUMS", ru: "О компании FERUMS", href: "/about" },
