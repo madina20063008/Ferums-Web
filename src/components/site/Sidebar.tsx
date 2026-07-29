@@ -39,14 +39,32 @@ const MailIcon = <svg viewBox="0 0 24 24" width="20" height="20" {...IP}><rect x
 export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);      // mobile drawer
-  const [collapsed, setCollapsed] = useState(true); // desktop icon rail (default collapsed)
+  // Desktop icon rail: collapsed by default. A language switch remounts this
+  // layout; the lazy initializer reads a one-shot flag (set on the EN/RU click)
+  // so it mounts ALREADY expanded — no collapse→expand flash. On the initial SSR
+  // render window is undefined, so a fresh visit/reload always starts collapsed.
+  const [collapsed, setCollapsed] = useState<boolean>(() => {
+    try {
+      if (typeof window !== "undefined" && sessionStorage.getItem("ferums-sidebar-keepopen") === "1") {
+        sessionStorage.removeItem("ferums-sidebar-keepopen");
+        return false;
+      }
+    } catch {}
+    return true;
+  });
 
-  // Always start collapsed on a fresh visit (no persistence) — the rail opens
-  // with an animation when the user clicks the mark. State is kept only in
-  // memory, so it survives in-app navigation but resets to collapsed on reload.
   useEffect(() => {
     document.documentElement.setAttribute("data-sidebar", collapsed ? "collapsed" : "expanded");
   }, [collapsed]);
+  const keepOpenAcrossNav = () => {
+    // Read the live attribute (source of truth) rather than the React closure,
+    // so it can't be stale if the click follows an expand very quickly.
+    try {
+      if (document.documentElement.getAttribute("data-sidebar") === "expanded") {
+        sessionStorage.setItem("ferums-sidebar-keepopen", "1");
+      }
+    } catch {}
+  };
 
   const rest = pathname.replace(/^\/(en|ru)(?=\/|$)/, "") || "";
 
@@ -91,8 +109,8 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
   const Controls = () => (
     <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 14, paddingTop: 24 }}>
       <div className="side-langs" style={{ gap: 2, padding: 3, border: "1px solid var(--border-strong)", borderRadius: 10, alignSelf: "flex-start" }}>
-        <Link href={localized("en", rest)} scroll={false} className="mono" style={toggleBtn(locale === "en")}>EN</Link>
-        <Link href={localized("ru", rest)} scroll={false} className="mono" style={toggleBtn(locale === "ru")}>RU</Link>
+        <Link href={localized("en", rest)} scroll={false} onClick={keepOpenAcrossNav} className="mono" style={toggleBtn(locale === "en")}>EN</Link>
+        <Link href={localized("ru", rest)} scroll={false} onClick={keepOpenAcrossNav} className="mono" style={toggleBtn(locale === "ru")}>RU</Link>
       </div>
       <Link href={localized(locale, "/contact")} onClick={() => setOpen(false)} title={nav.contactCta} className="btn btn-primary side-contact">
         <span className="side-ico">{MailIcon}</span>

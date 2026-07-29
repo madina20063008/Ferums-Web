@@ -105,16 +105,17 @@ body {
 .side-logo-mark:hover { border-color: rgba(47, 217, 166, 0.5); color: var(--accent); transform: translateY(-1px); }
 .side-collapse, .side-expand {
   display: none; flex: none; cursor: pointer; align-items: center; justify-content: center;
-  background: none; border: none; padding: 4px; color: var(--green);
-  transition: color .22s ease;
+  width: 32px; height: 32px; border-radius: 9px;
+  background: var(--card); border: 1px solid var(--border-strong); color: var(--green);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
 }
 .side-collapse { margin-left: auto; }
-.side-collapse:hover, .side-expand:hover { color: var(--accent); }
+.side-collapse:hover, .side-expand:hover { color: var(--accent); border-color: var(--accent); background: rgba(28, 175, 232, 0.12); }
 
 .side-group { display: flex; flex-direction: column; gap: 4px; }
 .side-link {
-  display: flex; align-items: center; gap: 13px; padding: 11px 14px; border-radius: 10px;
-  font-size: 15px; font-weight: 500; color: var(--text-dim); white-space: nowrap; overflow: hidden;
+  display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px;
+  font-size: 13.5px; font-weight: 500; color: var(--text-dim); white-space: nowrap; overflow: hidden;
   transition: background .2s ease, color .2s ease;
 }
 .site-scope .side-link:hover { color: var(--text); background: var(--surface); }
