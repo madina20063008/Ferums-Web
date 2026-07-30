@@ -66,145 +66,150 @@ body {
   color: var(--green);
 }
 
-/* Layout: fixed left sidebar + content */
+/* ============================================================
+   Sidebar — deep-navy, Siemens-Energy-inspired.
+   Always blue in both themes; collapses to a 3-icon rail
+   (menu · search · contact) and expands to the full menu.
+   ============================================================ */
 .site-shell { min-height: 100vh; }
-.site-main { margin-left: 280px; min-width: 0; }
+.site-main { margin-left: 300px; min-width: 0; transition: margin-left .7s cubic-bezier(.16,1,.3,1); }
 
 .site-sidebar {
-  position: fixed; top: 0; left: 0; bottom: 0; width: 280px;
+  /* Fixed navy palette — independent of the light/dark site theme. */
+  --side-bg: #14274d;                       /* deep navy base */
+  --side-text: rgba(255,255,255,0.92);
+  --side-dim: rgba(255,255,255,0.66);
+  --side-faint: rgba(255,255,255,0.42);
+  --side-border: rgba(255,255,255,0.12);
+  --side-hover: rgba(255,255,255,0.08);
+  --side-active: rgba(28,175,232,0.20);
+  --side-surface: rgba(255,255,255,0.06);
+  --side-menu: #1c3157;                      /* raised surfaces (dropdown) */
+
+  position: fixed; top: 0; left: 0; bottom: 0; width: 300px;
   box-sizing: border-box;
-  background: var(--bg-2);
-  border-right: 1px solid var(--border);
+  background: var(--side-bg);
+  border-right: 1px solid rgba(255,255,255,0.06);
   display: flex; flex-direction: column;
-  padding: 36px 24px 28px;
-  z-index: 100; overflow-y: auto;
+  color: var(--side-text);
+  z-index: 100;
+  transition: width .7s cubic-bezier(.16,1,.3,1);
 }
-/* Light theme: give the sidebar a soft tinted panel instead of stark white. */
-[data-theme="light"] .site-sidebar { background: #E9ECF1; border-right-color: rgba(16,20,28,0.08); }
-/* Footer matches the sidebar panel in light theme; keeps var(--bg-2) in dark. */
+
 .site-footer { background: var(--bg-2); }
 [data-theme="light"] .site-footer { background: #E9ECF1; }
 .site-topbar { display: none; }
 .site-scrim { display: none; }
 
-/* ── Sidebar internals (icon rail + expanded) ─────────────────────────────── */
-.site-main { transition: margin-left 1s cubic-bezier(.16,1,.3,1); }
-.site-sidebar { transition: width 1s cubic-bezier(.16,1,.3,1); }
-@keyframes sideFadeIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
-/* softer variant for rows whose icons are already visible (avoids a hard flash) */
-@keyframes sideSlideIn { from { opacity: .35; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
-
-.side-top-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
-.side-collapse, .side-expand {
-  display: none; flex: none; cursor: pointer; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 9px;
-  background: var(--card); border: 1px solid var(--border-strong); color: var(--green);
-  transition: color .2s ease, border-color .2s ease, background .2s ease;
+/* ── Persistent icon rail (search · toggle ☰/✕ · contact) ── */
+.side-rail { display: none; }
+.rail-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 11px;
+  background: transparent; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.82);
+  transition: background .2s ease, color .2s ease;
 }
-.side-collapse:hover, .side-expand:hover { color: var(--accent); border-color: var(--accent); background: rgba(28, 175, 232, 0.12); }
+.rail-btn:hover { background: var(--side-hover); color: #fff; }
+.rail-btn svg { width: 26px; height: 26px; }
+.rail-contact { color: var(--accent); }
+.rail-contact:hover { background: rgba(28,175,232,0.15); color: var(--accent); }
+
+/* ── Expanded panel ── */
+.side-panel { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; padding: 30px 24px 26px; overflow-y: auto; }
+.side-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 24px; }
+.side-brand { display: inline-flex; align-items: center; }
+.side-brand img { height: 34px; width: auto; object-fit: contain; }
+.side-panel-close {
+  display: none; flex: none; cursor: pointer; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--side-surface); border: 1px solid var(--side-border); color: rgba(255,255,255,0.8);
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.side-panel-close:hover { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.24); }
+.side-group-first { margin-top: 4px; }
 
 /* ── Search ── */
-.side-search { position: relative; flex: 1; min-width: 0; }
+.side-search { position: relative; min-width: 0; margin-bottom: 8px; }
 .side-search-field {
-  display: flex; align-items: center; gap: 9px; padding: 9px 12px; border-radius: 10px;
-  background: var(--surface); border: 1px solid var(--border-strong);
+  display: flex; align-items: center; gap: 9px; padding: 10px 12px; border-radius: 10px;
+  background: var(--side-surface); border: 1px solid var(--side-border);
   transition: border-color .2s ease, box-shadow .2s ease;
 }
-.side-search-field:focus-within { border-color: var(--green); box-shadow: 0 0 0 3px rgba(47,217,166,.15); }
-.side-search-ico { flex: none; display: inline-flex; color: var(--text-dim); }
-.side-search-field:focus-within .side-search-ico { color: var(--green); }
-.side-search-field input { flex: 1; min-width: 0; background: none; border: none; outline: none; color: var(--text); font-size: 14px; font-family: inherit; }
-.side-search-field input::placeholder { color: var(--text-faint); }
+.side-search-field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(28,175,232,.18); }
+.side-search-ico { flex: none; display: inline-flex; color: var(--side-faint); }
+.side-search-field:focus-within .side-search-ico { color: var(--accent); }
+.side-search-field input { flex: 1; min-width: 0; background: none; border: none; outline: none; color: var(--side-text); font-size: 14px; font-family: inherit; }
+.side-search-field input::placeholder { color: var(--side-faint); }
 .side-search-list {
   position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 350;
   list-style: none; margin: 0; padding: 5px;
-  background: var(--card); border: 1px solid var(--green); border-radius: 12px; box-shadow: var(--shadow);
+  background: var(--side-menu); border: 1px solid var(--side-border); border-radius: 12px;
+  box-shadow: 0 22px 54px rgba(0,0,0,.5);
 }
 .side-search-list li { margin: 0; }
 .side-search-list button {
   display: block; width: 100%; text-align: left; cursor: pointer;
   padding: 9px 12px; border-radius: 8px; border: none; background: none;
-  color: var(--text); font-size: 14px; font-family: inherit;
+  color: var(--side-text); font-size: 14px; font-family: inherit;
   transition: background .15s ease, color .15s ease;
 }
-.side-search-list button:hover { background: rgba(47,217,166,.12); color: var(--green); }
-/* Collapsed rail: a search icon that opens the expanded menu */
-.side-search-collapsed {
-  display: none; margin: 0 auto 8px; width: 32px; height: 32px; border-radius: 9px;
-  cursor: pointer; align-items: center; justify-content: center;
-  background: var(--card); border: 1px solid var(--border-strong); color: var(--green);
-  transition: color .2s ease, border-color .2s ease, background .2s ease;
-}
-.side-search-collapsed:hover { color: var(--accent); border-color: var(--accent); background: rgba(28,175,232,.12); }
-.side-search-collapsed svg { width: 16px; height: 16px; }
+.side-search-list button:hover { background: rgba(28,175,232,.16); color: #fff; }
 
-.side-group { display: flex; flex-direction: column; gap: 4px; }
-.side-link {
-  display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px;
-  font-size: 13.5px; font-weight: 500; color: var(--text-dim); white-space: nowrap; overflow: hidden;
-  transition: background .2s ease, color .2s ease;
+/* ── Nav groups & links ── */
+.side-section {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: rgba(255,255,255,0.40); margin: 26px 0 8px; padding: 0 12px;
 }
-.site-scope .side-link:hover { color: var(--text); background: var(--surface); }
-.side-link.active { color: var(--accent); background: rgba(28,175,232,.12); }
-.side-ico { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; }
-.side-langs { display: inline-flex; }
+.side-group { display: flex; flex-direction: column; gap: 2px; }
+.side-link {
+  display: flex; align-items: center; gap: 13px; padding: 11px 12px; border-radius: 10px;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.72); white-space: nowrap; overflow: hidden;
+  transition: background .18s ease, color .18s ease;
+}
+.site-scope .side-link:hover { color: #fff; background: var(--side-hover); }
+.side-link.active { color: #fff; background: var(--side-active); box-shadow: inset 3px 0 0 var(--accent); }
+.side-ico { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; color: currentColor; }
+.side-link.active .side-ico { color: var(--accent); }
+
+/* ── Controls (language switch + contact) ── */
+.side-controls { margin-top: auto; display: flex; flex-direction: column; gap: 14px; padding-top: 26px; }
+.side-langs {
+  display: inline-flex; gap: 2px; padding: 3px; align-self: flex-start;
+  border: 1px solid var(--side-border); border-radius: 10px; background: rgba(255,255,255,0.04);
+}
 .side-contact { width: 100%; }
 .side-contact .side-ico { color: #fff; width: auto; }
 
-/* Desktop: collapsed icon rail by default; [data-sidebar="expanded"] widens it. */
+/* ── Desktop: rail always visible; panel appears when [data-sidebar="expanded"] ── */
 @media (min-width: 1025px) {
-  .site-sidebar { width: 84px; padding: 30px 18px 24px; }
-  .site-main { margin-left: 84px; }
-  html[data-sidebar="expanded"] .site-sidebar { width: 280px; padding: 36px 24px 28px; }
-  html[data-sidebar="expanded"] .site-main { margin-left: 280px; }
-
-  /* collapsed look */
-  .site-sidebar { overflow: visible; }
-  .side-top-row { flex-direction: column; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .side-expand { display: inline-flex; }
-  .side-search-collapsed { display: inline-flex; }
-  .side-search, .side-collapse, .side-section, .side-contact .side-label { display: none; }
-  .side-link { justify-content: center; padding: 11px 0; gap: 0; position: relative; overflow: visible; }
-  .side-contact { justify-content: center; padding: 13px 0; }
-  /* language switch stacks vertically (RU under EN) to fit the narrow rail */
-  .side-langs { flex-direction: column; align-self: center; gap: 4px; }
-  /* the label becomes a hover tooltip to the right of the icon — ONLY while
-     collapsed (not expanded), otherwise it would hide the real inline labels */
-  html:not([data-sidebar="expanded"]) .side-link .side-label {
-    display: block; position: absolute; left: calc(100% + 12px); top: 50%; transform: translateY(-50%) translateX(-4px);
-    padding: 7px 12px; border-radius: 9px; background: var(--card); color: var(--text);
-    border: 1px solid var(--border); box-shadow: var(--shadow);
-    font-size: 13px; font-weight: 500; white-space: nowrap; pointer-events: none;
-    opacity: 0; transition: opacity .16s ease, transform .16s ease; z-index: 300;
+  .site-sidebar { flex-direction: row; width: 60px; }
+  .site-main { margin-left: 60px; }
+  .side-rail {
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    width: 60px; flex: none; padding: 30px 0 28px;
   }
-  html:not([data-sidebar="expanded"]) .side-link:hover .side-label { opacity: 1; transform: translateY(-50%) translateX(0); }
+  .side-panel { display: none; border-left: 1px solid rgba(255,255,255,0.08); }
 
-  /* expanded look */
-  html[data-sidebar="expanded"] .site-sidebar { overflow-y: auto; }
-  html[data-sidebar="expanded"] .side-top-row { flex-direction: row; gap: 10px; margin-bottom: 24px; }
-  html[data-sidebar="expanded"] .side-expand { display: none; }
-  html[data-sidebar="expanded"] .side-search-collapsed { display: none; }
-  html[data-sidebar="expanded"] .side-search { display: block; }
-  html[data-sidebar="expanded"] .side-collapse { display: inline-flex; }
-  html[data-sidebar="expanded"] .side-section { display: block; }
-  html[data-sidebar="expanded"] .side-langs { display: inline-flex; flex-direction: row; align-self: flex-start; }
-  html[data-sidebar="expanded"] .side-link .side-label,
-  html[data-sidebar="expanded"] .side-contact .side-label { display: inline; }
-  html[data-sidebar="expanded"] .side-link { justify-content: flex-start; padding: 11px 14px; gap: 13px; }
-  html[data-sidebar="expanded"] .side-contact { justify-content: center; padding: 14px 24px; }
+  html[data-sidebar="expanded"] .site-sidebar { width: 344px; }
+  html[data-sidebar="expanded"] .site-main { margin-left: 344px; }
+  html[data-sidebar="expanded"] .side-panel { display: flex; }
 }
 
+/* ── Tablet / mobile: off-canvas drawer showing the full panel ── */
 @media (max-width: 1024px) {
   .site-main { margin-left: 0; padding-top: 64px; }
   .site-topbar {
     display: flex; align-items: center; justify-content: space-between;
     position: fixed; top: 0; left: 0; right: 0; height: 64px; padding: 0 22px;
-    background: var(--bg-2); border-bottom: 1px solid var(--border); z-index: 90;
+    background: var(--side-bg); border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 90;
   }
-  .site-sidebar {
-    transform: translateX(-100%); transition: transform 0.3s ease; z-index: 110;
-  }
+  .site-topbar-menu { background: none; border: none; color: #fff; cursor: pointer; display: inline-flex; padding: 6px; }
+  .site-sidebar { width: 300px; transform: translateX(-100%); transition: transform 0.3s ease; z-index: 110; }
   .site-sidebar.open { transform: translateX(0); }
+  .side-rail { display: none !important; }
+  .side-panel { display: flex !important; }
+  .side-panel-close { display: inline-flex; }
   .site-scrim { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 105; }
 }
 
