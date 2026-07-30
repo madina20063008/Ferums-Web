@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { Locale } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
 
@@ -34,10 +33,42 @@ function iconFor(href: string): React.ReactNode {
   const hit = NAV_ICONS.find((n) => href.includes(n.match));
   return hit ? hit.icon : <svg viewBox="0 0 24 24" width="20" height="20" {...IP}><circle cx="12" cy="12" r="3" /></svg>;
 }
-const MailIcon = <svg viewBox="0 0 24 24" width="20" height="20" {...IP}><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>;
+const HeadsetIcon = <svg viewBox="0 0 24 24" width="20" height="20" {...IP}><path d="M4 13a8 8 0 0 1 16 0" /><rect x="3" y="13" width="4" height="6" rx="1.4" /><rect x="17" y="13" width="4" height="6" rx="1.4" /><path d="M20 19a3 3 0 0 1-3 3h-3" /></svg>;
+const SearchIcon = <svg viewBox="0 0 24 24" width="18" height="18" {...IP}><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" /></svg>;
+
+// Live-filter search over the menu items; suggestions navigate on click.
+function SearchBox({ items, placeholder, onGo }: { items: { label: string; href: string }[]; placeholder: string; onGo: (href: string) => void }) {
+  const [q, setQ] = useState("");
+  const ql = q.trim().toLowerCase();
+  const results = ql ? items.filter((i) => i.label.toLowerCase().includes(ql)).slice(0, 6) : [];
+  return (
+    <div className="side-search">
+      <div className="side-search-field">
+        <span className="side-search-ico">{SearchIcon}</span>
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && results[0]) { setQ(""); onGo(results[0].href); } }}
+          placeholder={placeholder}
+          aria-label={placeholder}
+        />
+      </div>
+      {results.length > 0 && (
+        <ul className="side-search-list">
+          {results.map((r) => (
+            <li key={r.href}>
+              <button type="button" onClick={() => { setQ(""); onGo(r.href); }}>{r.label}</button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);      // mobile drawer
   // Desktop icon rail: collapsed by default. A language switch remounts this
   // layout; the lazy initializer reads a one-shot flag (set on the EN/RU click)
@@ -68,14 +99,13 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
 
   const rest = pathname.replace(/^\/(en|ru)(?=\/|$)/, "") || "";
 
-  const logoDark = nav.logo;
-  const logoLight = nav.logo.replace(/(\.[a-z0-9]+)$/i, "-dark$1");
-  const renderLogo = (w: number, h: number, hpx: number, priority = false) => (
-    <>
-      <Image className="logo-on-dark" src={logoDark} alt={nav.siteName} width={w} height={h} priority={priority} style={{ height: hpx, width: "auto" }} />
-      <Image className="logo-on-light" src={logoLight} alt={nav.siteName} width={w} height={h} priority={priority} style={{ height: hpx, width: "auto" }} />
-    </>
-  );
+  // Clicking a menu entry gently closes the rail (the width transition animates
+  // it shut) and closes the mobile drawer.
+  const closeAfterNav = () => { setOpen(false); setCollapsed(true); };
+  const goTo = (href: string) => { closeAfterNav(); router.push(localized(locale, href)); };
+
+  // Everything searchable from the menu.
+  const searchItems = [...nav.main, ...nav.company, { label: nav.contactCta, href: "/contact" }];
 
   const isActive = (href: string) => {
     const full = localized(locale, href);
@@ -85,7 +115,7 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
   const NavLink = ({ href, label }: { href: string; label: string }) => (
     <Link
       href={localized(locale, href)}
-      onClick={() => setOpen(false)}
+      onClick={closeAfterNav}
       title={label}
       className={`side-link${isActive(href) ? " active" : ""}`}
     >
@@ -112,8 +142,8 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
         <Link href={localized("en", rest)} scroll={false} onClick={keepOpenAcrossNav} className="mono" style={toggleBtn(locale === "en")}>EN</Link>
         <Link href={localized("ru", rest)} scroll={false} onClick={keepOpenAcrossNav} className="mono" style={toggleBtn(locale === "ru")}>RU</Link>
       </div>
-      <Link href={localized(locale, "/contact")} onClick={() => setOpen(false)} title={nav.contactCta} className="btn btn-primary side-contact">
-        <span className="side-ico">{MailIcon}</span>
+      <Link href={localized(locale, "/contact")} onClick={closeAfterNav} title={nav.contactCta} className="btn btn-primary side-contact">
+        <span className="side-ico">{HeadsetIcon}</span>
         <span className="side-label">{nav.contactCta}</span>
       </Link>
     </div>
@@ -123,34 +153,26 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
     <>
       {/* Mobile top bar */}
       <div className="site-topbar">
-        <Link href={localized(locale, "/")} aria-label={nav.siteName}>
-          {renderLogo(120, 40, 40)}
-        </Link>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <Link href={localized(locale, "/")} aria-label={nav.siteName}><img src={nav.logo} alt={nav.siteName} style={{ height: 34, width: "auto" }} /></Link>
         <button onClick={() => setOpen(true)} aria-label="Menu" style={{ background: "none", border: "none", color: "var(--text)", fontSize: 26, cursor: "pointer" }}>☰</button>
       </div>
 
       {open && <div onClick={() => setOpen(false)} className="site-scrim" />}
 
       <nav className={`site-sidebar${open ? " open" : ""}`} aria-label="Primary">
-        {/* Logo / collapse toggle */}
-        <div className="side-logo-row">
-          {/* Collapsed: the "F" mark — click to expand */}
-          <button className="side-logo-mark" onClick={() => setCollapsed(false)} aria-label="Expand menu" title="Expand">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/uploads/f-mark.png" alt="FERUMS" style={{ height: 28, width: "auto" }} />
+        {/* Top row: search (expanded) + collapse/expand controls */}
+        <div className="side-top-row">
+          <button className="side-expand" onClick={() => setCollapsed(false)} aria-label="Open menu" title="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
-          {/* Expanded (and mobile): full wordmark + collapse chevron */}
-          <Link href={localized(locale, "/")} className="side-logo-full" aria-label={nav.siteName}>
-            {renderLogo(160, 80, 64, true)}
-          </Link>
-          <button className="side-collapse" onClick={() => setCollapsed(true)} aria-label="Collapse menu" title="Collapse">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 17l-5-5 5-5M11 17l-5-5 5-5" /></svg>
-          </button>
-          {/* Collapsed: expand chevron under the F mark */}
-          <button className="side-expand" onClick={() => setCollapsed(false)} aria-label="Expand menu" title="Expand">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 17l5-5-5-5M13 17l5-5-5-5" /></svg>
+          <SearchBox items={searchItems} placeholder={locale === "ru" ? "Поиск" : "Search"} onGo={goTo} />
+          <button className="side-collapse" onClick={() => setCollapsed(true)} aria-label="Close menu" title="Close">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
           </button>
         </div>
+        {/* Collapsed rail: a search icon that opens the expanded menu */}
+        <button className="side-search-collapsed" onClick={() => setCollapsed(false)} aria-label="Search" title="Search">{SearchIcon}</button>
 
         <NavLinks />
         <Controls />
