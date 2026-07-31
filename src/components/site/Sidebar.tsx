@@ -98,6 +98,18 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
   useEffect(() => {
     document.documentElement.setAttribute("data-sidebar", collapsed ? "collapsed" : "expanded");
   }, [collapsed]);
+
+  // Desktop: clicking anywhere outside the sidebar collapses the expanded panel.
+  useEffect(() => {
+    if (collapsed) return;
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 1024px)").matches) return;
+    const onDown = (e: MouseEvent) => {
+      const nav = document.querySelector(".site-sidebar");
+      if (nav && !nav.contains(e.target as Node)) setCollapsed(true);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [collapsed]);
   const keepOpenAcrossNav = () => {
     // Read the live attribute (source of truth) rather than the React closure,
     // so it can't be stale if the click follows an expand very quickly.
@@ -142,6 +154,11 @@ export function Sidebar({ locale, nav }: { locale: Locale; nav: NavData }) {
 
   return (
     <>
+      {/* Persistent brand mark over the hero — shown on every page (desktop),
+          hidden while the panel is expanded (the panel carries its own logo). */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <Link className="site-brandmark" href={localized(locale, "/")} aria-label={nav.siteName}><img src="/uploads/1.png" alt={nav.siteName} /></Link>
+
       {/* Mobile top bar */}
       <div className="site-topbar">
         {/* eslint-disable-next-line @next/next/no-img-element */}

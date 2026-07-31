@@ -101,6 +101,9 @@ body {
 .site-topbar { display: none; }
 .site-scrim { display: none; }
 
+/* Persistent brand mark over the hero (desktop only) — mirrors Siemens' page logo. */
+.site-brandmark { display: none; }
+
 /* ── Persistent icon rail (search · toggle ☰/✕ · contact) ── */
 .side-rail { display: none; }
 .rail-btn {
@@ -190,6 +193,13 @@ body {
     width: 60px; flex: none; padding: 30px 0 28px;
   }
   .side-panel { display: none; border-left: 1px solid rgba(255,255,255,0.08); }
+
+  .site-brandmark {
+    display: inline-flex; position: fixed; top: 30px; left: 88px; z-index: 95;
+    transition: opacity .4s ease;
+  }
+  .site-brandmark img { height: 46px; width: auto; }
+  html[data-sidebar="expanded"] .site-brandmark { opacity: 0; pointer-events: none; }
 
   html[data-sidebar="expanded"] .site-sidebar { width: 344px; }
   html[data-sidebar="expanded"] .site-main { margin-left: 344px; }
@@ -305,7 +315,9 @@ img { max-width: 100%; }
 /* Centered hero content: every direct child is horizontally centered and its
    text centered; button rows (inline flex) center their items too. */
 .hero-center { text-align: center; }
-.hero-center > * { margin-left: auto; margin-right: auto; }
+/* Force horizontal centering even when a child sets an inline `margin: Npx 0 0`
+   (that shorthand would otherwise pin margin-left/right to 0 and shove it left). */
+.hero-center > * { margin-left: auto !important; margin-right: auto !important; }
 .hero-center [style*="display: flex"] { justify-content: center; }
 
 /* ===== Light-theme hero swap (.hero-lightswap) =====
