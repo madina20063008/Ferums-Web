@@ -18,12 +18,10 @@ export const PARTNERS: PartnerSeed[] = [
   { name: "Parker Meggitt", countryEn: "USA", countryRu: "США", logo: "/partners/parker-meggitt.png", url: "" },
   { name: "Mueller Steam Specialty", countryEn: "USA", countryRu: "США", logo: "/partners/mueller-steam-specialty.png", url: "" },
   { name: "Nuovo Pignone", countryEn: "USA", countryRu: "США", logo: "/partners/nuovo-pignone.png", url: "" },
-  { name: "S-LOK", countryEn: "South Korea", countryRu: "Южная Корея", logo: "/partners/s-lok.png", url: "" },
   { name: "FBM Hudson", countryEn: "Italy", countryRu: "Италия", logo: "/partners/fbm-hudson.png", url: "" },
   { name: "THINKTANK", countryEn: "China", countryRu: "Китай", logo: "/partners/thinktank.png", url: "" },
   { name: "Young Engineering", countryEn: "USA", countryRu: "США", logo: "/partners/young-engineering.png", url: "" },
   { name: "YOKOGAWA", countryEn: "Japan", countryRu: "Япония", logo: "/partners/yokogawa.png", url: "" },
-  { name: "JILP", countryEn: "China", countryRu: "Китай", logo: "/partners/jilp.png", url: "" },
   { name: "SKF", countryEn: "China, France", countryRu: "Китай, Франция", logo: "/partners/skf.webp", url: "" },
   { name: "KOYO", countryEn: "China, Japan", countryRu: "Китай, Япония", logo: "/partners/koyo.png", url: "" },
 ];

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import { ok, auth, handler, parse } from "@/lib/api";
 import { settingSchema } from "@/lib/schemas";
+import { revalidateSite } from "@/lib/crud";
 
 // GET /api/settings            -> all settings
 // GET /api/settings?key=site   -> single setting's valueJson (public; site reads this)
@@ -23,5 +24,6 @@ export const PUT = handler(async (req) => {
     update: { valueJson },
     create: { key, valueJson },
   });
+  revalidateSite();
   return ok(row);
 });

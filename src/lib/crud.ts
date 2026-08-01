@@ -1,5 +1,18 @@
 import { type ZodType } from "zod";
+import { revalidatePath } from "next/cache";
 import { ok, fail, auth, handler, parse } from "./api";
+
+// Invalidate the whole public site cache after an admin write, so content
+// changes (add/edit/delete of any resource) show on every page on next visit.
+// The public pages all live under (site)/[locale]/layout.tsx → the route
+// pattern is "/[locale]"; type "layout" cascades to every nested page + locale.
+export function revalidateSite() {
+  try {
+    revalidatePath("/[locale]", "layout");
+  } catch {
+    // never let a revalidation hiccup fail the mutation itself
+  }
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface Delegate {
@@ -42,6 +55,7 @@ export function collection(delegate: Delegate, schema: ZodType, opts: Options = 
     if (protectWrites && !publicCreate) await auth();
     const data = await parse(req, schema);
     const created = await delegate.create({ data: data as any });
+    revalidateSite();
     return ok(created, 201);
   });
 
@@ -72,6 +86,7 @@ export function item(delegate: Delegate, schema: ZodType, opts: Options = {}) {
     const data: Record<string, unknown> = {};
     for (const k of Object.keys(body as object)) if (k in parsed) data[k] = parsed[k];
     const updated = await delegate.update({ where: { id: castId(id, idType) }, data: data as any });
+    revalidateSite();
     return ok(updated);
   });
 
@@ -79,6 +94,7 @@ export function item(delegate: Delegate, schema: ZodType, opts: Options = {}) {
     if (protectWrites) await auth();
     const { id } = await ctx.params;
     await delegate.delete({ where: { id: castId(id, idType) } });
+    revalidateSite();
     return ok({ success: true });
   });
 
