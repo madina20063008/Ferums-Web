@@ -98,6 +98,14 @@ body {
 
 .site-footer { background: var(--bg-2); }
 [data-theme="light"] .site-footer { background: #E9ECF1; }
+/* Footer social icons */
+.social-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 9px;
+  color: var(--text-dim); border: 1px solid var(--border);
+  transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.social-ico:hover { color: var(--accent); border-color: var(--accent); background: rgba(28,175,232,.10); transform: translateY(-2px); }
 .site-topbar { display: none; }
 .site-scrim { display: none; }
 

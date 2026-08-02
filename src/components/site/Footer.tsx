@@ -2,9 +2,10 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
 import { pick } from "@/lib/i18n";
 import { localized } from "@/lib/nav";
-import type { SiteContent } from "@/lib/site-content";
+import type { SiteContent, Social } from "@/lib/site-content";
+import { SocialIcon, SOCIAL_PLATFORM_LABEL } from "@/components/site/SocialIcons";
 
-export function Footer({ locale, site }: { locale: Locale; site: SiteContent }) {
+export function Footer({ locale, site, social }: { locale: Locale; site: SiteContent; social?: Social }) {
   const f = site.footer;
   const col = (title: string, links: SiteContent["footer"]["productLinks"]) => (
     <div>
@@ -37,10 +38,27 @@ export function Footer({ locale, site }: { locale: Locale; site: SiteContent }) 
         </div>
         <div style={{ marginTop: 48, paddingTop: 24, borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
           <span className="mono" style={{ fontSize: 12, color: "var(--text-faint)" }}>{pick(f.copyright, locale)}</span>
-          <div style={{ display: "flex", gap: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
             <Link href={localized(locale, "/contact")} className="mono" style={{ fontSize: 12, color: "var(--text-faint)" }}>
               {pick(site.nav.contactCta, locale)}
             </Link>
+            {social && social.length > 0 && (
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                {social.map((s, i) => (
+                  <a
+                    key={i}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={SOCIAL_PLATFORM_LABEL[s.platform] || s.platform}
+                    title={SOCIAL_PLATFORM_LABEL[s.platform] || s.platform}
+                    className="social-ico"
+                  >
+                    <SocialIcon platform={s.platform} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

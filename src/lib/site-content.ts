@@ -4,6 +4,11 @@
 export type Bi = { en: string; ru: string };
 export type NavLink = { en: string; ru: string; href: string };
 
+// ---- Social media links (stored in the `social` Setting; editable in admin) ----
+// A dynamic list: admin can add/remove any platform (see SOCIAL_PLATFORMS).
+export type SocialLink = { platform: string; url: string };
+export type Social = SocialLink[];
+
 // ---- List collections (map 1:1 to Prisma models) ----
 export interface ProductSeed {
   slug: string;

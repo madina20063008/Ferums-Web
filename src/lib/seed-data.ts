@@ -10,7 +10,15 @@ import type {
   ServiceSeed,
   PartnerSeed,
   SiteContent,
+  Social,
 } from "./site-content";
+
+// Social media links seeded into the `social` Setting (backend source of truth,
+// editable from Admin → Social media). A dynamic list — add/remove any platform.
+export const SOCIAL: Social = [
+  { platform: "instagram", url: "https://www.instagram.com/ferumsllc?igsh=MTE1Z2IwbzR6em41dQ%3D%3D&utm_source=qr" },
+  { platform: "linkedin", url: "https://www.linkedin.com/company/ferumsllc/?viewAsMember=true" },
+];
 
 export const PARTNERS: PartnerSeed[] = [
   { name: "HORA", countryEn: "Germany", countryRu: "Германия", logo: "/partners/hora.png", url: "" },

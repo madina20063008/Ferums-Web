@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../globals.css";
 import { LOCALES, isLocale, pick, type Locale } from "@/lib/i18n";
-import { getSite } from "@/lib/site-data";
+import { getSite, getSocial } from "@/lib/site-data";
 import { SITE_URL, absUrl } from "@/lib/site";
 import { Sidebar, type NavData } from "@/components/site/Sidebar";
 import { Footer } from "@/components/site/Footer";
@@ -39,7 +39,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  const site = await getSite();
+  const [site, social] = await Promise.all([getSite(), getSocial()]);
 
   const nav: NavData = {
     logo: site.seo.organization.logo || "/uploads/1.png",
@@ -80,7 +80,7 @@ export default async function LocaleLayout({
           <Sidebar locale={locale} nav={nav} />
           <div className="site-main">
             <main>{children}</main>
-            <Footer locale={locale} site={site} />
+            <Footer locale={locale} site={site} social={social} />
           </div>
         </div>
         <RevealObserver />

@@ -13,6 +13,7 @@ interface Props {
 const navItems = [
   { href: "/admin", label: "Dashboard", exact: true },
   ...RESOURCE_ORDER.map((k) => ({ href: `/admin/${k}`, label: RESOURCES[k].label, exact: false })),
+  { href: "/admin/social", label: "Social media", exact: true },
   { href: "/admin/settings", label: "Site settings", exact: true },
 ];
 

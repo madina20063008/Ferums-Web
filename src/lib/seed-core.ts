@@ -1,7 +1,7 @@
 import type { PrismaClient, Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { prisma } from "./db";
-import { PRODUCTS, PROJECTS, ARTICLES, ROLES, INDUSTRIES, SERVICES, PARTNERS, SITE } from "./seed-data";
+import { PRODUCTS, PROJECTS, ARTICLES, ROLES, INDUSTRIES, SERVICES, PARTNERS, SITE, SOCIAL } from "./seed-data";
 
 /** Idempotent: fills the database with the admin user + all starting content. */
 export async function seedDatabase(db: PrismaClient = prisma) {
@@ -21,6 +21,14 @@ export async function seedDatabase(db: PrismaClient = prisma) {
     where: { key: "site" },
     update: { valueJson: siteJson },
     create: { key: "site", valueJson: siteJson },
+  });
+
+  // ---------------- Social media links ----------------
+  const socialJson = SOCIAL as unknown as Prisma.InputJsonValue;
+  await db.setting.upsert({
+    where: { key: "social" },
+    update: { valueJson: socialJson },
+    create: { key: "social", valueJson: socialJson },
   });
 
   // ---------------- Products ----------------

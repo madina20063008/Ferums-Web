@@ -1,6 +1,6 @@
 import type { Product, Project, Article, CareerRole, Industry, Service, Partner } from "@prisma/client";
 import { prisma } from "./db";
-import type { SiteContent } from "./site-content";
+import type { SiteContent, Social } from "./site-content";
 import { SITE as SITE_FALLBACK, PRODUCTS, PROJECTS, ARTICLES, ROLES, INDUSTRIES, SERVICES, PARTNERS } from "./seed-data";
 
 // The public site is DB-optional: every read tries the database first, and
@@ -53,6 +53,29 @@ export async function getSite(): Promise<SiteContent> {
   // fall back to bundled content so metadata/render can never read `undefined`.
   if (v && v.seo && v.nav && v.footer && v.home) return v as SiteContent;
   return SITE_FALLBACK;
+}
+
+// ---- Social media links (the `social` Setting) — read straight from the DB;
+// no hardcoded fallback (an empty list simply hides the icons). ----
+export async function getSocial(): Promise<Social> {
+  const row = await safe(() => prisma.setting.findUnique({ where: { key: "social" } }), null);
+  const v = row?.valueJson as unknown;
+  // New shape: an array of { platform, url }.
+  if (Array.isArray(v)) {
+    return v
+      .filter((x): x is { platform?: unknown; url?: unknown } => !!x && typeof x === "object")
+      .map((x) => ({ platform: String(x.platform || "website"), url: String(x.url || "") }))
+      .filter((x) => x.url);
+  }
+  // Backward-compat: legacy { instagram, linkedin } object.
+  if (v && typeof v === "object") {
+    const o = v as Record<string, string>;
+    const out: Social = [];
+    if (o.instagram) out.push({ platform: "instagram", url: o.instagram });
+    if (o.linkedin) out.push({ platform: "linkedin", url: o.linkedin });
+    return out;
+  }
+  return [];
 }
 
 export async function getProducts(): Promise<Product[]> {
