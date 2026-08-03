@@ -15,6 +15,12 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
+// ISR: regenerate every 60s so admin/DB changes reliably reach the live site
+// even on self-hosted `next start` (where fully-static pages would otherwise be
+// frozen behind a 1-year cache). On-demand revalidateSite() still updates
+// instantly on admin writes; this is the safety net. Cascades to all pages.
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const loc: Locale = isLocale(locale) ? locale : "en";
