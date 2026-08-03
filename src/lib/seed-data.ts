@@ -22,7 +22,6 @@ export const SOCIAL: Social = [
 
 export const PARTNERS: PartnerSeed[] = [
   { name: "HORA", countryEn: "Germany", countryRu: "Германия", logo: "/partners/hora.png", url: "" },
-  { name: "ORBIT MERRET", countryEn: "Czech Republic", countryRu: "Чехия", logo: "/partners/orbit-merret.png", url: "" },
   { name: "Parker Meggitt", countryEn: "USA", countryRu: "США", logo: "/partners/parker-meggitt.png", url: "" },
   { name: "Mueller Steam Specialty", countryEn: "USA", countryRu: "США", logo: "/partners/mueller-steam-specialty.png", url: "" },
   { name: "Nuovo Pignone", countryEn: "USA", countryRu: "США", logo: "/partners/nuovo-pignone.png", url: "" },
