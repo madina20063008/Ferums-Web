@@ -74,13 +74,49 @@ export async function seedDatabase(db: PrismaClient = prisma) {
   }
 }
 
+/**
+ * Idempotent backfill for resources added AFTER a database was first seeded
+ * (older production DBs never got Partners, Services, or the social setting,
+ * because the full seed only runs on a completely empty DB). Each block runs
+ * only when that resource is empty/missing, so it never overwrites admin edits.
+ */
+export async function backfillMissing(db: PrismaClient = prisma) {
+  // Partners
+  try {
+    if ((await db.partner.count()) === 0) {
+      for (let i = 0; i < PARTNERS.length; i++) await db.partner.create({ data: { ...PARTNERS[i], order: i } });
+      console.log("✔ backfilled partners");
+    }
+  } catch (e) { console.error("[backfill] partners:", (e as Error)?.message); }
+
+  // Services
+  try {
+    if ((await db.service.count()) === 0) {
+      for (let i = 0; i < SERVICES.length; i++) await db.service.create({ data: { ...SERVICES[i], order: i } });
+      console.log("✔ backfilled services");
+    }
+  } catch (e) { console.error("[backfill] services:", (e as Error)?.message); }
+
+  // Social media setting
+  try {
+    const existing = await db.setting.findUnique({ where: { key: "social" } });
+    if (!existing) {
+      await db.setting.create({ data: { key: "social", valueJson: SOCIAL as unknown as Prisma.InputJsonValue } });
+      console.log("✔ backfilled social setting");
+    }
+  } catch (e) { console.error("[backfill] social:", (e as Error)?.message); }
+}
+
 let seedPromise: Promise<void> | null = null;
 export async function ensureSeeded() {
   try {
     const count = await prisma.user.count();
-    if (count > 0) return;
-    if (!seedPromise) seedPromise = seedDatabase().then(() => undefined);
-    await seedPromise;
+    if (count === 0) {
+      if (!seedPromise) seedPromise = seedDatabase().then(() => undefined);
+      await seedPromise;
+    }
+    // Always backfill resources that older, already-seeded DBs may lack.
+    await backfillMissing();
   } catch (e) {
     seedPromise = null;
     console.error("[ensureSeeded]", e);
