@@ -66,3 +66,4 @@ the original design in `src/lib/seed-data.ts`.
 Set `DATABASE_URL` (Postgres, e.g. Neon), `JWT_SECRET`, and optionally
 `NEXT_PUBLIC_SITE_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`. The `vercel-build` script
 rewrites the Prisma provider to `postgresql`, pushes the schema, and builds.
+
